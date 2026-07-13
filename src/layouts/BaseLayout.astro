@@ -1,0 +1,35 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  overlayHeader?: boolean;
+}
+
+const { title, description, overlayHeader = false } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/png" href={`${base}assets/images/home/hero-background.png`} />
+    <title>{title}</title>
+  </head>
+  <body style={`--hero-image: url("${base}assets/images/home/hero-background.png")`}>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SiteHeader currentPath={Astro.url.pathname} overlay={overlayHeader} />
+    <main id="main-content"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>

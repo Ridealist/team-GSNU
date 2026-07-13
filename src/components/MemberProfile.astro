@@ -1,0 +1,16 @@
+---
+import type { Member } from "../data/members";
+interface Props { member: Member }
+const { member } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const initials = member.displayName.replace("DR. ", "").split(" ").map((part) => part[0]).join("").toUpperCase();
+---
+<article class="member-profile">
+  {member.image ? (
+    <img src={`${base}assets/images/members/${member.image}`} alt={member.imageAlt} width="720" height="720" loading="lazy" />
+  ) : (
+    <div class="member-placeholder" aria-hidden="true">{initials}</div>
+  )}
+  <h2>{member.displayName}</h2>
+  {member.biography.map((paragraph) => <p>{paragraph}</p>)}
+</article>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { designConsiderations, researchQuestions } from "../data/home";
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="GEAR-UP PROJECT" description="GEAR-UP explores generative AI agents and immersive simulations for pre-service teacher training." overlayHeader>
+  <section class="home-hero">
+    <div class="home-hero__content">
+      <h1>GEAR-UP</h1>
+      <p class="acronym" aria-label="Generative Artificial intelligence Research in Edu Group — Undergraduate teachers' Problem-based learning">
+        <span><b>G</b>enerative <b>A</b>rtificial intelligence <b>R</b>esearch in <b>E</b>du Group</span>
+        <span>— <b>U</b>ndergraduate teachers' <b>P</b>roblem-based learning</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="tagline"><h2>Immerse Yourself in the Future of Teacher Training via GENAI</h2></section>
+
+  <section class="research-intro section-shell">
+    <h2>Unravel the Mystery: How Generative Agents Elevate Learning</h2>
+    <p>Our research delves deep into three key research questions (RQs):</p>
+    <div class="research-questions">
+      {researchQuestions.map((question) => (
+        <p><strong><u>{question.id}: {question.label}:</u></strong> {question.body}</p>
+      ))}
+    </div>
+    <img class="home-media" src={`${base}assets/images/home/research-overview.png`} alt="Generative agent teacher-training simulation overview showing a virtual classroom and student personas" width="1280" height="730" />
+  </section>
+
+  <section class="design-section section-shell">
+    <h2 class="split-heading"><span>Interaction</span><span>Design</span></h2>
+    <div class="design-copy">
+      <h3>Beyond the Text: Key Design Considerations Shape the Future</h3>
+      <p>The Generative Agent project is more than just cutting-edge technology. It's a collaborative effort, constantly evolving based on valuable feedback. Here are some key design considerations that are shaping the future of this innovative training tool:</p>
+      <ol>
+        {designConsiderations.map((item) => <li><strong>{item.title}:</strong> {item.body}</li>)}
+      </ol>
+    </div>
+    <img class="home-media design-media" src={`${base}assets/images/home/interaction-design.png`} alt="Interaction design examples from the generative agent teacher-training simulation" width="1280" height="686" loading="lazy" />
+  </section>
+
+  <section class="system-section section-shell">
+    <h2 class="split-heading"><span>System</span><span>Design</span></h2>
+  </section>
+</BaseLayout>

@@ -1,0 +1,8 @@
+---
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<section class="page-hero">
+  <h1>{title}</h1>
+  <div aria-hidden="true"></div>
+</section>

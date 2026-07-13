@@ -1,0 +1,45 @@
+---
+import { navigation } from "../data/navigation";
+
+interface Props { currentPath: string; overlay?: boolean }
+const { currentPath, overlay = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const linkFor = (href: string) => `${base}${href}`;
+const normalizedPath = currentPath.replace(base, "/");
+---
+
+<header class:list={["site-header", { "site-header--overlay": overlay }]}>
+  <div class="site-header__inner">
+    <a class="site-name" href={base}>GEAR-UP PROJECT</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="primary-navigation" class="site-nav" aria-label="Primary navigation">
+      {navigation.map((item) => {
+        const itemPath = item.href ? `/${item.href}` : "/";
+        const isCurrent = normalizedPath === itemPath || normalizedPath === itemPath.slice(0, -1);
+        return <a href={linkFor(item.href)} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
+      })}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = document.querySelector<HTMLElement>(".site-nav");
+
+  const closeMenu = () => {
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Open navigation menu");
+    nav?.classList.remove("is-open");
+  };
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+    nav?.classList.toggle("is-open", !isOpen);
+  });
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
+</script>

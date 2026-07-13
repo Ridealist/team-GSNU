@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import MemberProfile from "../components/MemberProfile.astro";
+import { memberIntroduction, members } from "../data/members";
+---
+<BaseLayout title="Members · GEAR-UP PROJECT" description="Meet the interdisciplinary research team behind the GEAR-UP generative agent project." overlayHeader>
+  <PageHero title="Members" />
+  <section class="members-intro content-narrow">
+    <h2>Meet the Minds Behind Generative Agent: A Symphony of Expertise</h2>
+    {memberIntroduction.map((paragraph, index) => index === 0
+      ? <p>This <strong><em>interdisciplinary collaboration</em></strong>{paragraph.slice("This interdisciplinary collaboration".length)}</p>
+      : <p>{paragraph}</p>)}
+  </section>
+  <section class="members-grid section-shell" aria-label="GEAR-UP members">
+    {members.map((member) => <MemberProfile member={member} />)}
+  </section>
+</BaseLayout>

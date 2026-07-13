@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { researchItems } from "../data/researchWork";
+const conference = researchItems.filter((item) => item.category === "conference");
+const workingPapers = researchItems.filter((item) => item.category === "working-paper");
+---
+<BaseLayout title="Research Work · GEAR-UP PROJECT" description="Conference presentations and working papers from the GEAR-UP research team." overlayHeader>
+  <PageHero title="Research Work" />
+  <div class="internal-content content-narrow">
+    <section>
+      <h2>Conference Proceeding/Presentation</h2>
+      <ul class="citation-list">
+        {conference.map((item) => <li>{item.citation} {item.link && <a href={item.link.href} target="_blank" rel="noopener noreferrer">[{item.link.label}]</a>}</li>)}
+      </ul>
+    </section>
+    <section>
+      <h2>Working Papers</h2>
+      <ul class="citation-list">{workingPapers.map((item) => <li>{item.citation}</li>)}</ul>
+    </section>
+  </div>
+</BaseLayout>
