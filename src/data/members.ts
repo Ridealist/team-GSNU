@@ -56,7 +56,7 @@ export const members: Member[] = [
       "Junbo Koh's research interests focus on “Human-Centered AI in Education (AIED)” with a theory-driven approach to addressing real-world educational challenges.",
       "He is particularly interested in how AI systems can foster learner agency so that students can make their own learning paths and take ownership of their lives, engaging AI as a collaborative partner rather than depending on it.",
     ],
-    researchInterests: ["Human-Centered AIED", "Human-AI Interaction", "Learning Sciences", "Learner Agency"],
+    researchInterests: ["Human-Centered AIED", "Human-AI Interaction", "Learning Sciences", "Educational Technology"],
     profileUrl: "https://www.linkedin.com/in/junbokoh92/",
     profileLabel: "LinkedIn",
     scholarUrl: "https://scholar.google.com/citations?user=2hDR1lgAAAAJ&hl=en&oi=ao",
