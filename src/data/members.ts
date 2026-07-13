@@ -51,7 +51,7 @@ export const members: Member[] = [
     image: "junbo-koh.jpg",
     imageAlt: "Portrait of Junbo Koh",
     role: "Researcher",
-    affiliation: "Elementary School Teacher · M.S. in Educational Technology · Seoul National University",
+    affiliation: "Elementary School Teacher · M.A. in Educational Technology & Integrated Major in Applied Data Science · Seoul National University",
     biography: [
       "Junbo Koh's research interests focus on “Human-Centered AI in Education (AIED)” with a theory-driven approach to addressing real-world educational challenges.",
       "He is particularly interested in how AI systems can foster learner agency so that students can make their own learning paths and take ownership of their lives, engaging AI as a collaborative partner rather than depending on it.",
