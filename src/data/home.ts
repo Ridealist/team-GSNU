@@ -1,40 +1,18 @@
-export const researchQuestions = [
+export const currentResearchQuestions = [
   {
-    id: "RQ1",
-    label: "Building the Bridge to the Classroom",
-    body: "We explore how generative agent simulations, powered by advanced AI, can be designed and implemented for immersive teacher training. This includes crafting realistic problem scenarios and simulating student interactions, allowing pre-service teachers to hone their skills in a safe, controlled environment.",
+    id: "RQ 01",
+    title: "GenAI의 과업 대화자 가능성",
+    body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?",
   },
   {
-    id: "RQ2",
-    label: "From Seed to Persona: Bringing Students to Life",
-    body: "Dive into the fascinating world of persona development for our generative agents. We unlock the secrets of crafting unique student characters with distinct traits, motivations, and learning styles, mirroring the diverse realities of a classroom.",
-  },
-  {
-    id: "RQ3",
-    label: "Building a Better Bridge: In-Service Teachers Speak Out",
-    body: "We listen to the voices of experienced educators, gathering invaluable feedback on how to refine and enhance our generative AI simulations. Their insights guide us towards creating a training experience that bridges the gap between theory and practical application.",
+    id: "RQ 02",
+    title: "AI 역할에 따른 차이",
+    body: "서로 다른 AI 상호작용 역할은 초등 EFL 학습자의 과업 수행과 언어 발달에 어떤 영향을 미치는가?",
   },
 ] as const;
 
-export const designConsiderations = [
-  {
-    title: "Heightened Immersion and Authenticity",
-    body: "Experience the power of AI-driven interactions that feel real and unpredictable, unlike traditional scripted scenarios.",
-  },
-  {
-    title: "Balancing Realism with Learning Objectives",
-    body: "Navigate the delicate dance between realism and focus, ensuring pre-service teachers stay laser-focused on their learning goals amidst engaging virtual interactions.",
-  },
-  {
-    title: "Embodied Learning: The Power of Presence",
-    body: "Witness the impact of realistic sounds, movements, and actions in our virtual agents, driving deeper engagement and improved learning outcomes.",
-  },
-  {
-    title: "Alignment with Established Theories",
-    body: "Rest assured that our simulations are grounded in solid educational principles, seamlessly integrating inquiry-based, discovery, and experiential learning models.",
-  },
-  {
-    title: "Ready to step into the future of teacher training?",
-    body: "The Generative Agent project invites you to explore the potential of AI-driven simulations in shaping the next generation of educators. Join us as we unlock the door to a world of immersive learning and prepare teachers for the challenges and rewards of the flipped classroom revolution.",
-  },
+export const interactionMeasures = [
+  { value: "Turns", label: "총 발화 순서 수" },
+  { value: "Words", label: "발화당 평균 단어 수" },
+  { value: "Topics", label: "주제 개시 빈도" },
 ] as const;
