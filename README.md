@@ -1,6 +1,6 @@
-# GEAR-UP Reference Clone
+# TBLT-Agent
 
-An Astro/TypeScript static baseline clone of the public [GEAR-UP PROJECT reference site](https://sites.google.com/view/gearup-ai/home?authuser=0). It reproduces the four-page information architecture, dark patterned headers, condensed typography, orange accents, long-form Home flow, member grid, publication list, and contact page without Google Sites platform chrome.
+TBLT-Agent는 과업 기반 언어교수법(Task-Based Language Teaching, TBLT)을 적용한 생성형 AI 기반 영어 말하기 수업 연구 프로젝트입니다. 생성형 AI가 모둠의 제3의 구성원으로 참여할 때 초등 영어 학습자의 상호작용, 과제 몰입도, 언어 산출이 어떻게 변화하는지 탐구합니다.
 
 ## Stack
 
@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-Astro prints the local URL after startup.
+Astro가 출력하는 로컬 주소를 브라우저에서 여세요.
 
 ## Validate and build
 
@@ -26,33 +26,18 @@ npm run build
 npm run preview
 ```
 
-The production output is written to `dist/`.
+프로덕션 결과물은 `dist/`에 생성됩니다.
 
-## GitHub Pages deployment
+## Content
 
-1. Push the repository to GitHub with `main` as the deployment branch.
-2. In **Settings → Pages**, select **GitHub Actions** as the source.
-3. Push to `main` or run **Deploy to GitHub Pages** manually from the Actions tab.
-
-`.github/workflows/deploy-pages.yml` installs dependencies, checks the Astro project, builds it, uploads `dist/`, and deploys the Pages artifact.
-
-`astro.config.mjs` reads `GITHUB_REPOSITORY` during Actions builds. A repository named `<owner>.github.io` uses `/`; any other repository automatically uses `/<repository-name>/`. For a non-Actions production build, set `GITHUB_ACTIONS=true` and `GITHUB_REPOSITORY=<owner>/<repository>` to reproduce the Pages base path.
-
-## Updating content
-
+- Home content: `src/data/home.ts`, `src/pages/index.astro`
 - Navigation: `src/data/navigation.ts`
-- Home research and design copy: `src/data/home.ts`
-- Members and biographies: `src/data/members.ts`
-- Research citations: `src/data/researchWork.ts`
-- Contact copy: `src/pages/contact.astro`
+- Members: `src/data/members.ts`
+- Research work: `src/data/researchWork.ts`
+- Contact: `src/pages/contact.astro`
 
-## Updating images
+연구 내용의 기준 문서는 `docs/연구계획서_초안.docx.pdf`입니다.
 
-- Home assets: `public/assets/images/home/`
-- Member portraits: `public/assets/images/members/`
+## Deployment
 
-Keep existing filenames and aspect ratios to replace images without layout changes. The recovered reference assets are local; production pages do not hotlink Google-hosted images. See `ASSET_TODO.md` for the remaining portrait placeholder.
-
-## Reference captures
-
-Development-only screenshots from the reference audit are stored in `reference-captures/`. They are not imported by the production site.
+`main` 브랜치가 GitHub에 푸시되면 `.github/workflows/deploy-pages.yml`이 사이트를 검사하고 빌드한 뒤 GitHub Pages에 배포합니다. 저장소의 **Settings → Pages**에서 배포 소스를 **GitHub Actions**로 설정해야 합니다.
