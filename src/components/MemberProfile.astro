@@ -1,16 +1,32 @@
 ---
 import type { Member } from "../data/members";
-interface Props { member: Member }
-const { member } = Astro.props;
+interface Props { member: Member; index: number }
+const { member, index } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const initials = member.displayName.replace("DR. ", "").split(" ").map((part) => part[0]).join("").toUpperCase();
 ---
+
 <article class="member-profile">
-  {member.image ? (
-    <img src={`${base}assets/images/members/${member.image}`} alt={member.imageAlt} width="720" height="720" loading="lazy" />
-  ) : (
-    <div class="member-placeholder" aria-hidden="true">{initials}</div>
-  )}
-  <h2>{member.displayName}</h2>
-  {member.biography.map((paragraph) => <p>{paragraph}</p>)}
+  <div class="member-profile__visual">
+    <img src={`${base}assets/images/members/${member.image}`} alt={member.imageAlt} width="720" height="720" loading={index === 0 ? "eager" : "lazy"} />
+    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+  </div>
+  <div class="member-profile__content">
+    <p class="member-role">{member.role}</p>
+    <h2>{member.displayName}</h2>
+    <p class="member-affiliation">{member.affiliation}</p>
+    <div class="member-biography">
+      {member.biography.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+    <ul class="member-interests" aria-label={`${member.displayName} research interests`}>
+      {member.researchInterests.map((interest) => <li>{interest}</li>)}
+    </ul>
+    <div class="member-links">
+      <a class="member-link" href={member.profileUrl} target="_blank" rel="noopener noreferrer">
+        {member.profileLabel}<span aria-hidden="true">↗</span>
+      </a>
+      <a class="member-link" href={member.scholarUrl} target="_blank" rel="noopener noreferrer">
+        Google Scholar<span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
 </article>
