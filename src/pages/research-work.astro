@@ -2,21 +2,60 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { researchItems } from "../data/researchWork";
+
 const conference = researchItems.filter((item) => item.category === "conference");
 const workingPapers = researchItems.filter((item) => item.category === "working-paper");
 ---
-<BaseLayout title="Research Work · GEAR-UP PROJECT" description="Conference presentations and working papers from the GEAR-UP research team." overlayHeader>
+
+<BaseLayout title="Research Work · TBLT-Agent" description="Conference proposals and working papers from the TBLT-Agent research team." overlayHeader>
   <PageHero title="Research Work" />
-  <div class="internal-content content-narrow">
-    <section>
-      <h2>Conference Proceeding/Presentation</h2>
-      <ul class="citation-list">
-        {conference.map((item) => <li>{item.citation} {item.link && <a href={item.link.href} target="_blank" rel="noopener noreferrer">[{item.link.label}]</a>}</li>)}
-      </ul>
+
+  <div class="research-content section-shell">
+    <header class="research-intro">
+      <p class="section-index">RESEARCH OUTPUTS · 2026-2027</p>
+      <div>
+        <h2>From ongoing inquiry<br />to shared scholarship.</h2>
+        <p>현재 진행 중인 TBLT-Agent 연구의 학술대회 제안과 논문 준비 현황입니다. 모든 항목은 현재 단계가 드러나도록 구분해 표기합니다.</p>
+      </div>
+    </header>
+
+    <section class="research-group">
+      <div class="research-group__heading">
+        <span>01</span>
+        <div><p>IN PROGRESS</p><h2>Working Conference Proceeding</h2></div>
+      </div>
+      <ol class="research-list">
+        {conference.map((item) => (
+          <li>
+            <div class="research-status">{item.status}</div>
+            <p class="apa-citation">
+              {item.authors} ({item.date}). <cite>{item.title}</cite> [{item.descriptor}]. <em>{item.venue}</em>{item.location ? `, ${item.location}.` : "."}
+            </p>
+            <div class="research-meta">
+              <p>{item.note}</p>
+              {item.link && <a href={item.link.href} target="_blank" rel="noopener noreferrer">{item.link.label}<span aria-hidden="true">↗</span></a>}
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
-    <section>
-      <h2>Working Papers</h2>
-      <ul class="citation-list">{workingPapers.map((item) => <li>{item.citation}</li>)}</ul>
+
+    <section class="research-group">
+      <div class="research-group__heading">
+        <span>02</span>
+        <div><p>IN PREPARATION</p><h2>Working Papers</h2></div>
+      </div>
+      <ol class="research-list">
+        {workingPapers.map((item) => (
+          <li>
+            <div class="research-status">{item.status}</div>
+            <p class="apa-citation">
+              {item.authors} ({item.date}). <cite>{item.title}</cite> [{item.descriptor}]. <em>{item.venue}</em>.
+            </p>
+            <div class="research-meta"><p>{item.note}</p></div>
+          </li>
+        ))}
+      </ol>
     </section>
   </div>
 </BaseLayout>
