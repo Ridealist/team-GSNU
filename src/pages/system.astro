@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="System · TBLT-Agent"
+  description="Access the TBLT-Agent English conversation practice system and view its KERIS Edzip registration information."
+  overlayHeader
+>
+  <PageHero title="System" />
+
+  <div class="system-content section-shell">
+    <header class="system-intro">
+      <p class="section-index">TBLT-AGENT PLATFORM</p>
+      <div>
+        <h2>영어 과업을 위한<br />실시간 음성 AI 파트너.</h2>
+        <p>TBLT-Agent는 과업 기반 언어교수법을 적용한 영어 회화 실습 시스템입니다. 아래 테스트 계정으로 학습자 경험을 확인할 수 있습니다.</p>
+        <a class="system-primary-link" href="https://tblt-agent.net/" target="_blank" rel="noopener noreferrer">
+          시스템 접속하기 <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="access-section" aria-labelledby="access-heading">
+      <div class="system-section-heading">
+        <span>01</span>
+        <div><p>GET STARTED</p><h2 id="access-heading">접속 방법</h2></div>
+      </div>
+
+      <ol class="access-steps">
+        <li>
+          <span class="access-step-number">STEP 01</span>
+          <h3>학습자 시스템 열기</h3>
+          <p>아래 주소를 열어 TBLT-Agent 로그인 화면으로 이동합니다.</p>
+          <a href="https://tblt-agent.net/" target="_blank" rel="noopener noreferrer">tblt-agent.net <span aria-hidden="true">↗</span></a>
+        </li>
+        <li>
+          <span class="access-step-number">STEP 02</span>
+          <h3>테스트 계정 입력</h3>
+          <p>학생용 테스트 계정 정보를 각 입력란에 입력합니다.</p>
+          <dl class="demo-credentials">
+            <div><dt>학번</dt><dd>99999</dd></div>
+            <div><dt>이름</dt><dd>테스트</dd></div>
+            <div><dt>Access code</dt><dd>aa00</dd></div>
+          </dl>
+        </li>
+        <li>
+          <span class="access-step-number">STEP 03</span>
+          <h3>영어 과업 시작</h3>
+          <p>안내에 따라 마이크 사용을 허용하고 실시간 음성 과업을 시작합니다.</p>
+          <small>원활한 이용을 위해 마이크가 연결된 Chrome 기반 브라우저를 권장합니다.</small>
+        </li>
+      </ol>
+    </section>
+
+    <section class="admin-section" aria-labelledby="admin-heading">
+      <div>
+        <p class="section-index">ADMINISTRATOR</p>
+        <h2 id="admin-heading">관리자 포털</h2>
+        <p>기존 시스템 주소 뒤에 <code>/admin/</code>을 붙인 관리자 전용 URL로 접속한 뒤 아래 테스트 계정을 입력합니다.</p>
+        <dl class="admin-credentials">
+          <div><dt>ID</dt><dd> ----- </dd></div>
+          <div><dt>Password</dt><dd> ----- </dd></div>
+        </dl>
+        <p class="credential-warning"><strong>보안 안내</strong> 실제 수업에서 활용중인 시스템입니다. 설정을 변경하지 마시고 실제 운영 상황을 확인하기 위한 용도로만 활용해주세요.</p>
+      </div>
+      <a href="https://tblt-agent.net/admin/" target="_blank" rel="noopener noreferrer">
+        Admin portal <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="edzip-section" aria-labelledby="edzip-heading">
+      <div class="system-section-heading">
+        <span>02</span>
+        <div><p>KERIS · EDZIP</p><h2 id="edzip-heading">에듀집 등록 현황</h2></div>
+      </div>
+
+      <div class="edzip-card">
+        <div class="edzip-card__status">
+          <span aria-hidden="true">✓</span>
+          <div><small>REGISTRATION STATUS</small><strong>등록 완료</strong></div>
+        </div>
+        <div class="edzip-card__content">
+          <p class="edzip-date">2026.07.07 · KERIS 안내</p>
+          <h3>과업 기반 언어교수법 적용<br />영어 회화 실습 시스템</h3>
+          <p>학습지원 소프트웨어 필수기준 체크리스트와 관련 증빙자료의 에듀집 등록이 완료되었습니다.</p>
+          <a href="https://edzip.kr/utilization/learning-sw/6a4c8430a8c837d1d3e536f4" target="_blank" rel="noopener noreferrer">
+            에듀집에서 확인하기 <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <figure class="edzip-proof">
+        <a href={`${base}assets/images/system/edzip-registration.png`} target="_blank" aria-label="에듀집 필수기준 점검결과 화면 원본 보기">
+          <img src={`${base}assets/images/system/edzip-registration.png`} alt="에듀집 필수기준 점검결과에서 과업 기반 언어교수법 적용 영어 회화 실습 시스템이 확인완료 상태로 등록된 화면" width="1602" height="1586" loading="lazy" />
+        </a>
+        <figcaption><span>KERIS EDZIP · 2026.07.07</span> 에듀집 필수기준 점검결과 등록 화면</figcaption>
+      </figure>
+      <p class="edzip-note">※ ‘등록 완료’는 KERIS 안내 메일에 따른 체크리스트 및 증빙자료의 에듀집 게시 상태를 의미합니다.</p>
+    </section>
+  </div>
+</BaseLayout>
