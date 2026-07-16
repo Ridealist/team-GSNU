@@ -11,6 +11,7 @@ interface Props {
 
 const { title, description, overlayHeader = false } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 ---
 <!doctype html>
 <html lang="ko">
@@ -18,9 +19,11 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#315cff" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <link rel="icon" href={favicon} type="image/svg+xml" />
     {canonical && <link rel="canonical" href={canonical} />}
     <title>{title}</title>
   </head>
