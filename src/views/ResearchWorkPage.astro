@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { researchItems } from "../data/researchWork";
+import type { Locale } from "../i18n/config";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+const content = {
+  ko: {
+    title: "연구 성과 · TBLT-Agent",
+    description: "TBLT-Agent 연구팀의 학술대회 제안과 준비 중인 논문을 소개합니다.",
+    hero: "Research Work",
+    introHeading: "진행 중인 탐구에서<br />공유되는 학술 성과로.",
+    introBody: "현재 진행 중인 TBLT-Agent 연구의 학술대회 제안과 논문 준비 현황입니다. 모든 항목은 현재 단계가 드러나도록 구분해 표기합니다.",
+    conferenceStatus: "진행 중",
+    conferenceHeading: "학술대회 발표 준비",
+    papersStatus: "준비 중",
+    papersHeading: "논문 준비",
+  },
+  en: {
+    title: "Research Work · TBLT-Agent",
+    description: "Conference proposals and working papers from the TBLT-Agent research team.",
+    hero: "Research Work",
+    introHeading: "From ongoing inquiry<br />to shared scholarship.",
+    introBody: "Explore the TBLT-Agent team’s conference proposals and manuscripts in preparation. Each item is clearly labeled to reflect its current stage of development.",
+    conferenceStatus: "IN PROGRESS",
+    conferenceHeading: "Working Conference Proceeding",
+    papersStatus: "IN PREPARATION",
+    papersHeading: "Working Papers",
+  },
+} as const;
+
+const copy = content[locale];
+const conference = researchItems.filter((item) => item.category === "conference");
+const workingPapers = researchItems.filter((item) => item.category === "working-paper");
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description} overlayHeader>
+  <PageHero title={copy.hero} />
+
+  <div class="research-content section-shell">
+    <header class="research-intro">
+      <p class="section-index">RESEARCH OUTPUTS · 2026-2027</p>
+      <div><h2 set:html={copy.introHeading} /><p>{copy.introBody}</p></div>
+    </header>
+
+    <section class="research-group">
+      <div class="research-group__heading"><span>01</span><div><p>{copy.conferenceStatus}</p><h2>{copy.conferenceHeading}</h2></div></div>
+      <ol class="research-list">
+        {conference.map((item) => (
+          <li>
+            <div class="research-status">{item.status[locale]}</div>
+            <p class="apa-citation">{item.authors} ({item.date}). <cite>{item.title}</cite> [{item.descriptor[locale]}]. <em>{item.venue}</em>{item.location ? `, ${item.location}.` : "."}</p>
+            <div class="research-meta"><p>{item.note[locale]}</p>{item.link && <a href={item.link.href} target="_blank" rel="noopener noreferrer">{item.link.label}<span aria-hidden="true">↗</span></a>}</div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="research-group">
+      <div class="research-group__heading"><span>02</span><div><p>{copy.papersStatus}</p><h2>{copy.papersHeading}</h2></div></div>
+      <ol class="research-list">
+        {workingPapers.map((item) => (
+          <li>
+            <div class="research-status">{item.status[locale]}</div>
+            <p class="apa-citation">{item.authors} ({item.date}). <cite>{item.title}</cite> [{item.descriptor[locale]}]. <em>{item.venue}</em>.</p>
+            <div class="research-meta"><p>{item.note[locale]}</p></div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,20 +1,32 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import type { Locale } from "../i18n/config";
+import { localizedPath, routeFromPath } from "../i18n/utils";
+import { ui } from "../i18n/ui";
 import "../styles/global.css";
 
 interface Props {
+  locale: Locale;
   title: string;
   description: string;
   overlayHeader?: boolean;
 }
 
-const { title, description, overlayHeader = false } = Astro.props;
+const { locale, title, description, overlayHeader = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const route = routeFromPath(Astro.url.pathname, base);
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const alternateUrls = Astro.site
+  ? {
+      ko: new URL(localizedPath("ko", route, base), Astro.site),
+      en: new URL(localizedPath("en", route, base), Astro.site),
+    }
+  : undefined;
 const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 ---
 <!doctype html>
-<html lang="ko">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -23,14 +35,19 @@ const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === "ko" ? "ko_KR" : "en_US"} />
+    <meta property="og:locale:alternate" content={locale === "ko" ? "en_US" : "ko_KR"} />
     <link rel="icon" href={favicon} type="image/svg+xml" />
     {canonical && <link rel="canonical" href={canonical} />}
+    {alternateUrls && <link rel="alternate" hreflang="ko" href={alternateUrls.ko} />}
+    {alternateUrls && <link rel="alternate" hreflang="en" href={alternateUrls.en} />}
+    {alternateUrls && <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />}
     <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <SiteHeader currentPath={Astro.url.pathname} overlay={overlayHeader} />
+    <a class="skip-link" href="#main-content">{ui[locale].skipToContent}</a>
+    <SiteHeader locale={locale} currentPath={Astro.url.pathname} overlay={overlayHeader} />
     <main id="main-content"><slot /></main>
-    <SiteFooter />
+    <SiteFooter locale={locale} />
   </body>
 </html>

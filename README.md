@@ -30,11 +30,15 @@ npm run preview
 
 ## Content
 
-- Home content: `src/data/home.ts`, `src/pages/index.astro`
+- Localized page content: `src/views/`
+- Locale configuration and shared UI strings: `src/i18n/`
 - Navigation: `src/data/navigation.ts`
 - Members: `src/data/members.ts`
 - Research work: `src/data/researchWork.ts`
-- Contact: `src/pages/contact.astro`
+- Korean routes: `src/pages/ko/`
+- English routes: `src/pages/en/`
+
+The default route redirects to `/en/`. Korean pages use `/ko/`, and the former unprefixed internal routes redirect to their English equivalents. The Contact page is archived in `src/archive/contact.astro` and is not published.
 
 연구 내용의 기준 문서는 `docs/연구계획서_초안.docx.pdf`입니다.
 

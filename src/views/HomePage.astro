@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { Locale } from "../i18n/config";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+const content = {
+  ko: {
+    title: "TBLT-Agent · 과업 대화자로서의 생성형 AI",
+    description: "TBLT-Agent는 AI의 주도적·협력적 상호작용 역할이 한국 초등 EFL 학습자의 과업 수행과 언어 발달에 미치는 영향을 탐구합니다.",
+    heroDescription: "같은 과업에서도 AI가 <em>어떻게 상호작용하는가</em>에 따라 학습자의 참여와 언어 사용은 달라질 수 있습니다.",
+    roleStageLabel: "Dominant AI와 Collaborative AI 상호작용 역할 비교",
+    studyHeading: "AI가 무엇을 말하는가보다,<br /><span>어떤 관계로 말하는가</span>에 주목합니다.",
+    studyBody: "협력적 또래 상호작용은 과업 기반 언어 학습의 중요한 기반입니다. 현재 연구는 생성형 AI를 단순한 응답 도구가 아닌 <strong>과업 대화자(Task Interlocutor)</strong>로 보고, AI의 상호작용 역할이 한국 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 탐구합니다.",
+    questionsHeading: "현재 연구의<br />두 가지 질문",
+    questions: [
+      { id: "RQ 01", title: "GenAI의 과업 대화자 가능성", body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?" },
+      { id: "RQ 02", title: "AI 역할에 따른 차이", body: "서로 다른 AI 상호작용 역할은 초등 EFL 학습자의 과업 수행과 언어 발달에 어떤 영향을 미치는가?" },
+    ],
+    rolesHeading: "하나의 AI,<br /><span>두 가지 상호작용 방식</span>",
+    rolesIntro: "Storch의 pair dynamics model을 바탕으로 대화형 AI의 역할을 두 조건으로 조작했습니다.",
+    dominantDescription: "AI가 상호작용을 주도하는 조건",
+    collaborativeDescription: "학습자와 AI가 상호작용을 함께 구성하는 조건",
+    dominantAria: "AI의 발화 비중이 큰 상호작용 패턴",
+    collaborativeAria: "학습자와 AI의 발화가 균형을 이루는 상호작용 패턴",
+    measuresHeading: "대화의 양상과<br />언어 학습의 변화",
+    measures: [
+      { value: "Turns", label: "총 발화 순서 수" },
+      { value: "Words", label: "발화당 평균 단어 수" },
+      { value: "Topics", label: "주제 개시 빈도" },
+    ],
+    questionsOutcome: "질문하기의 정확도",
+    suggestionsOutcome: "제안 화행의 정확도",
+    futureBadge: "2학기 확장 연구",
+    nextHeading: "AI와 학습자의 대화에서,<br /><strong>AI가 매개하는 학습자 간 협업으로.</strong>",
+    nextBody: "현재 연구에서 축적한 AI 상호작용 역할 설계를 바탕으로, 다음 단계에서는 AI가 두 학생 사이의 협업을 어떻게 매개하는지 탐구합니다.",
+    evolutionAria: "현재 연구와 2학기 확장 연구 비교",
+    currentEvolution: "Dominant vs Collaborative 역할이 과업 수행과 L2 학습에 미치는 영향",
+    futureEvolution: "학생 2명과 AI 1명으로 구성된 모둠에서 AI가 학습자 간 협업을 매개하는 방식",
+  },
+  en: {
+    title: "TBLT-Agent · Generative AI as a Task Interlocutor",
+    description: "TBLT-Agent explores how dominant and collaborative conversational AI roles influence Korean elementary EFL learners' task performance and language development.",
+    heroDescription: "Even within the same task, <em>how AI interacts</em> can shape learners’ participation and language use.",
+    roleStageLabel: "Comparison of dominant and collaborative AI interaction roles",
+    studyHeading: "Beyond what AI says,<br /><span>we focus on how it relates.</span>",
+    studyBody: "Collaborative peer interaction is a core foundation of task-based language learning. This study views generative AI not simply as a response tool but as a <strong>Task Interlocutor</strong>, examining how its interactional role influences task performance and L2 learning among Korean elementary EFL learners.",
+    questionsHeading: "Two questions<br />guiding our study",
+    questions: [
+      { id: "RQ 01", title: "GenAI as a task interlocutor", body: "How can generative AI support learners’ active task engagement during interactional tasks?" },
+      { id: "RQ 02", title: "Differences across AI roles", body: "How do different AI interactional roles affect elementary EFL learners’ task performance and language development?" },
+    ],
+    rolesHeading: "One AI,<br /><span>two ways of interacting</span>",
+    rolesIntro: "Drawing on Storch’s pair dynamics model, we operationalized two distinct roles for conversational AI.",
+    dominantDescription: "A condition in which AI leads the interaction",
+    collaborativeDescription: "A condition in which learners and AI co-construct the interaction",
+    dominantAria: "Interaction pattern with a larger proportion of AI talk",
+    collaborativeAria: "Interaction pattern with balanced learner and AI talk",
+    measuresHeading: "Interaction patterns<br />and changes in learning",
+    measures: [
+      { value: "Turns", label: "Total number of turns" },
+      { value: "Words", label: "Mean words per turn" },
+      { value: "Topics", label: "Topic initiation frequency" },
+    ],
+    questionsOutcome: "Accuracy of question formation",
+    suggestionsOutcome: "Accuracy of suggestion speech acts",
+    futureBadge: "Fall semester extension",
+    nextHeading: "From learner–AI dialogue<br /><strong>to AI-mediated peer collaboration.</strong>",
+    nextBody: "Building on the interactional role designs developed in the current study, the next phase will investigate how AI mediates collaboration between two learners.",
+    evolutionAria: "Comparison of the current study and the fall semester extension",
+    currentEvolution: "How dominant and collaborative roles affect task performance and L2 learning",
+    futureEvolution: "How AI mediates collaboration in a group of two learners and one AI agent",
+  },
+} as const;
+
+const copy = content[locale];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description} overlayHeader>
+  <section class="tblt-hero current-hero">
+    <div class="tblt-hero__grid section-shell">
+      <div class="tblt-hero__copy">
+        <h1>TBLT<span>-Agent</span></h1>
+        <p class="current-hero__title">Generative AI as a<br /><strong>Task Interlocutor</strong></p>
+        <p class="tblt-hero__description" set:html={copy.heroDescription} />
+      </div>
+
+      <div class="role-stage" aria-label={copy.roleStageLabel}>
+        <p class="role-stage__label">SAME TASK · DIFFERENT ROLE</p>
+        <div class="role-stage__axis" aria-hidden="true"><span></span></div>
+        <div class="role-stage__option role-stage__option--dominant"><span>ROLE 01</span><strong>DOMINANT</strong><small>AI-led interaction</small></div>
+        <div class="role-stage__agent"><span>AI</span><b>VOICE</b></div>
+        <div class="role-stage__option role-stage__option--collaborative"><span>ROLE 02</span><strong>COLLABORATIVE</strong><small>Shared interaction</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-statement section-shell">
+    <p class="section-index">01 · THE STUDY</p>
+    <div><h2 set:html={copy.studyHeading} /><p set:html={copy.studyBody} /></div>
+  </section>
+
+  <section class="questions-section current-questions">
+    <div class="section-shell">
+      <div class="section-heading"><p class="section-index">02 · RESEARCH QUESTIONS</p><h2 set:html={copy.questionsHeading} /></div>
+      <div class="question-list">
+        {copy.questions.map((question) => <article><span>{question.id}</span><div><h3>{question.title}</h3><p>{question.body}</p></div></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="study-section section-shell current-design">
+    <div class="section-heading section-heading--wide">
+      <p class="section-index">03 · INTERACTIONAL ROLES</p><h2 set:html={copy.rolesHeading} /><p>{copy.rolesIntro}</p>
+    </div>
+    <div class="role-comparison">
+      <article class="role-condition role-condition--dominant">
+        <div class="role-condition__top"><span>CONDITION A</span><b>01</b></div><h3>Dominant AI</h3><p>{copy.dominantDescription}</p>
+        <div class="talk-pattern" aria-label={copy.dominantAria}><i class="human">LEARNER</i><span></span><i class="ai">AI</i></div>
+      </article>
+      <article class="role-condition role-condition--collaborative">
+        <div class="role-condition__top"><span>CONDITION B</span><b>02</b></div><h3>Collaborative AI</h3><p>{copy.collaborativeDescription}</p>
+        <div class="talk-pattern talk-pattern--balanced" aria-label={copy.collaborativeAria}><i class="human">LEARNER</i><span></span><i class="ai">AI</i></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="measures-section section-shell">
+    <div class="section-heading"><p class="section-index">04 · WHAT WE MEASURE</p><h2 set:html={copy.measuresHeading} /></div>
+    <div class="measure-content">
+      <p class="measure-label">TASK PERFORMANCE</p>
+      <div class="measure-grid">{copy.measures.map((measure) => <article><strong>{measure.value}</strong><span>{measure.label}</span></article>)}</div>
+      <div class="learning-outcome">
+        <p class="measure-label">LEARNING OUTCOMES</p>
+        <div><strong>Questions</strong><span>{copy.questionsOutcome}</span></div>
+        <div><strong>Suggestions</strong><span>{copy.suggestionsOutcome}</span></div>
+        <small>Pretest - Posttest production accuracy</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-phase section-shell">
+    <div class="next-phase__intro">
+      <p class="section-index">05 · NEXT PHASE · 2026 FALL</p><span class="future-badge">{copy.futureBadge}</span>
+      <h2 set:html={copy.nextHeading} /><p>{copy.nextBody}</p>
+    </div>
+    <div class="research-evolution" aria-label={copy.evolutionAria}>
+      <article><span>NOW · SPRING SEMESTER</span><div class="evolution-diagram"><i>H</i><b>↔</b><i class="ai">AI</i></div><h3>Human-AI Interaction</h3><p>{copy.currentEvolution}</p></article>
+      <b class="evolution-arrow" aria-hidden="true">→</b>
+      <article class="future"><span>NEXT · FALL SEMESTER</span><div class="evolution-diagram"><i>H</i><b>↔</b><i>H</i><b>+</b><i class="ai">AI</i></div><h3>AI-Mediated Peer Interaction</h3><p>{copy.futureEvolution}</p></article>
+    </div>
+  </section>
+</BaseLayout>

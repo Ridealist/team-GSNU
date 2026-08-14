@@ -1,7 +1,9 @@
 ---
 import type { Member } from "../data/members";
-interface Props { member: Member; index: number }
-const { member, index } = Astro.props;
+import type { Locale } from "../i18n/config";
+import { ui } from "../i18n/ui";
+interface Props { member: Member; index: number; locale: Locale }
+const { member, index, locale } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -11,13 +13,13 @@ const base = import.meta.env.BASE_URL;
     <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
   </div>
   <div class="member-profile__content">
-    <p class="member-role">{member.role}</p>
+    <p class="member-role">{member.role[locale]}</p>
     <h2>{member.displayName}</h2>
     <p class="member-affiliation">{member.affiliation}</p>
     <div class="member-biography">
       {member.biography.map((paragraph) => <p>{paragraph}</p>)}
     </div>
-    <ul class="member-interests" aria-label={`${member.displayName} research interests`}>
+    <ul class="member-interests" aria-label={ui[locale].researchInterests(member.displayName)}>
       {member.researchInterests.map((interest) => <li>{interest}</li>)}
     </ul>
     <div class="member-links">
