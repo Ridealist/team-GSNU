@@ -1,25 +1,33 @@
 ---
-import { navigation } from "../data/navigation";
+import { getNavigation } from "../data/navigation";
+import type { Locale } from "../i18n/config";
+import { localizedPath, routeFromPath } from "../i18n/utils";
+import { ui } from "../i18n/ui";
 
-interface Props { currentPath: string; overlay?: boolean }
-const { currentPath, overlay = false } = Astro.props;
+interface Props { locale: Locale; currentPath: string; overlay?: boolean }
+const { locale, currentPath, overlay = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const linkFor = (href: string) => `${base}${href}`;
-const normalizedPath = currentPath.replace(base, "/");
+const navigation = getNavigation(locale);
+const currentRoute = routeFromPath(currentPath, base);
+const strings = ui[locale];
 ---
 
 <header class:list={["site-header", { "site-header--overlay": overlay }]}>
   <div class="site-header__inner">
-    <a class="site-name" href={base}>TBLT<span>-Agent</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+    <a class="site-name" href={localizedPath(locale, "", base)}>TBLT<span>-Agent</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label={strings.openMenu} data-open-label={strings.openMenu} data-close-label={strings.closeMenu}>
       <span></span><span></span><span></span>
     </button>
-    <nav id="primary-navigation" class="site-nav" aria-label="Primary navigation">
+    <nav id="primary-navigation" class="site-nav" aria-label={strings.primaryNavigation}>
       {navigation.map((item) => {
-        const itemPath = item.href ? `/${item.href}` : "/";
-        const isCurrent = normalizedPath === itemPath || normalizedPath === itemPath.slice(0, -1);
-        return <a href={linkFor(item.href)} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
+        const isCurrent = currentRoute === item.href;
+        return <a href={localizedPath(locale, item.href, base)} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
       })}
+      <div class="language-switcher" aria-label={strings.languageNavigation}>
+        <a href={localizedPath("en", currentRoute, base)} lang="en" hreflang="en" aria-current={locale === "en" ? "true" : undefined} aria-label={strings.switchToEnglish}>EN</a>
+        <span aria-hidden="true">/</span>
+        <a href={localizedPath("ko", currentRoute, base)} lang="ko" hreflang="ko" aria-current={locale === "ko" ? "true" : undefined} aria-label={strings.switchToKorean}>KO</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -30,14 +38,14 @@ const normalizedPath = currentPath.replace(base, "/");
 
   const closeMenu = () => {
     toggle?.setAttribute("aria-expanded", "false");
-    toggle?.setAttribute("aria-label", "Open navigation menu");
+    toggle?.setAttribute("aria-label", toggle.dataset.openLabel ?? "");
     nav?.classList.remove("is-open");
   };
 
   toggle?.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+    toggle.setAttribute("aria-label", isOpen ? (toggle.dataset.openLabel ?? "") : (toggle.dataset.closeLabel ?? ""));
     nav?.classList.toggle("is-open", !isOpen);
   });
   nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));

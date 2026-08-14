@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MemberProfile from "../components/MemberProfile.astro";
+import { members } from "../data/members";
+import type { Locale } from "../i18n/config";
+import { ui } from "../i18n/ui";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+const content = {
+  ko: {
+    title: "연구진 · TBLT-Agent",
+    description: "TBLT-Agent를 이끄는 세 연구자를 소개합니다.",
+    teamIndex: "연구진 · 03명",
+    heading: "언어 학습의 이론에서<br />교실의 실제와 AI 설계까지.",
+    body: "TBLT-Agent는 응용언어학, 과업 기반 언어교수법, 교육공학을 연결합니다. 서로 다른 전문성을 가진 세 연구자가 AI와 학습자의 상호작용을 이론에 근거해 설계하고, 실제 교실의 언어 학습 문제를 함께 탐구합니다.",
+  },
+  en: {
+    title: "Members · TBLT-Agent",
+    description: "Meet the three researchers behind TBLT-Agent.",
+    teamIndex: "THE TEAM · 03 MEMBERS",
+    heading: "From language-learning theory<br />to classroom practice and AI design.",
+    body: "TBLT-Agent brings together applied linguistics, task-based language teaching, and educational technology. Three researchers with complementary expertise ground learner–AI interaction in theory while investigating real language-learning challenges in the classroom.",
+  },
+} as const;
+
+const copy = content[locale];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description} overlayHeader>
+  <section class="members-hero">
+    <div class="section-shell">
+      <p class="eyebrow">Language Learning · Interaction · Human-Centered AI</p>
+      <h1>Three perspectives.<br /><span>One shared question.</span></h1>
+      <p>How can AI become a better partner in language learning?</p>
+    </div>
+  </section>
+
+  <section class="team-intro section-shell">
+    <p class="section-index">{copy.teamIndex}</p>
+    <div><h2 set:html={copy.heading} /><p>{copy.body}</p></div>
+  </section>
+
+  <section class="member-list section-shell" aria-label={ui[locale].membersLabel}>
+    {members.map((member, index) => <MemberProfile member={member} index={index} locale={locale} />)}
+  </section>
+</BaseLayout>

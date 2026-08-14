@@ -1,9 +1,11 @@
+import type { Locale } from "../i18n/config";
+
 export interface Member {
   slug: string;
   displayName: string;
   image: string;
   imageAlt: string;
-  role: string;
+  role: Record<Locale, string>;
   affiliation: string;
   biography: string[];
   researchInterests: string[];
@@ -18,7 +20,7 @@ export const members: Member[] = [
     displayName: "YouJin Kim",
     image: "youjin-kim.jpg",
     imageAlt: "Portrait of Professor YouJin Kim",
-    role: "Principal Investigator",
+    role: { ko: "연구책임자", en: "Principal Investigator" },
     affiliation: "Professor & Director of Graduate Studies · Applied Linguistics & ESL · Georgia State University",
     biography: [
       "Dr. YouJin Kim specializes in second language acquisition, second language pedagogy, and task-based language teaching and assessment. Her interactionist and psycholinguistic research examines how interactional feedback, language-related episodes, and alignment during oral interaction contribute to L2 development.",
@@ -34,7 +36,7 @@ export const members: Member[] = [
     displayName: "Sak Lee",
     image: "sak-lee.jpg",
     imageAlt: "Portrait of Sak Lee",
-    role: "Researcher",
+    role: { ko: "연구원", en: "Researcher" },
     affiliation: "Ph.D. Student · Applied Linguistics & ESL · Georgia State University",
     biography: [
       "Sak Lee is a Ph.D. student in Applied Linguistics at Georgia State University. His work connects instructed second language acquisition and task-based language teaching with emerging technologies for language learning.",
@@ -50,7 +52,7 @@ export const members: Member[] = [
     displayName: "Junbo Koh",
     image: "junbo-koh.jpg",
     imageAlt: "Portrait of Junbo Koh",
-    role: "Researcher",
+    role: { ko: "연구원", en: "Researcher" },
     affiliation: "Elementary School Teacher · M.A. in Educational Technology & Integrated Major in Applied Data Science · Seoul National University",
     biography: [
       "Junbo Koh's research interests focus on “Human-Centered AI in Education (AIED)” with a theory-driven approach to addressing real-world educational challenges.",

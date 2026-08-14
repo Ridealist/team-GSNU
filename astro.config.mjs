@@ -9,10 +9,25 @@ const base = process.env.GITHUB_ACTIONS === "true" && repository && !isRootPages
 const site = owner
   ? `https://${owner}.github.io${isRootPagesRepository ? "" : base}`
   : undefined;
+const redirectBase = base === "/" ? "" : base;
 
 export default defineConfig({
   output: "static",
   trailingSlash: "always",
   base,
   site,
+  redirects: {
+    "/": `${redirectBase}/en/`,
+    "/members": `${redirectBase}/en/members/`,
+    "/system": `${redirectBase}/en/system/`,
+    "/research-work": `${redirectBase}/en/research-work/`,
+  },
+  i18n: {
+    locales: ["ko", "en"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
+    },
+  },
 });
