@@ -13,5 +13,8 @@
     "@astrojs/check": "^0.9.11",
     "astro": "^7.4.1",
     "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=22.22.0"
   }
 }
