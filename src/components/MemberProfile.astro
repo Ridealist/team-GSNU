@@ -1,5 +1,6 @@
 ---
-import type { Member } from "../data/members";
+import { initials, type Member } from "../data/members";
+import { teamGroups } from "../data/teamGroups";
 import type { Locale } from "../i18n/config";
 import { ui } from "../i18n/ui";
 interface Props { member: Member; index: number; locale: Locale }
@@ -9,11 +10,11 @@ const base = import.meta.env.BASE_URL;
 
 <article class="member-profile">
   <div class="member-profile__visual">
-    <img src={`${base}assets/images/members/${member.image}`} alt={member.imageAlt} width="720" height="720" loading={index === 0 ? "eager" : "lazy"} />
+    {member.image ? <img src={`${base}assets/images/members/${member.image}`} alt={member.imageAlt ?? ""} width="720" height="720" loading={index === 0 ? "eager" : "lazy"} /> : <b class="member-profile__initials" aria-hidden="true">{initials(member)}</b>}
     <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
   </div>
   <div class="member-profile__content">
-    <p class="member-role">{member.role[locale]}</p>
+    <p class="member-role">{member.role[locale]} · {member.groups.map((id) => teamGroups[id].label).join(" × ")}</p>
     <h2>{member.displayName}</h2>
     <p class="member-affiliation">{member.affiliation}</p>
     <div class="member-biography">
@@ -23,12 +24,16 @@ const base = import.meta.env.BASE_URL;
       {member.researchInterests.map((interest) => <li>{interest}</li>)}
     </ul>
     <div class="member-links">
-      <a class="member-link" href={member.profileUrl} target="_blank" rel="noopener noreferrer">
-        {member.profileLabel}<span aria-hidden="true">↗</span>
-      </a>
-      <a class="member-link" href={member.scholarUrl} target="_blank" rel="noopener noreferrer">
-        Google Scholar<span aria-hidden="true">↗</span>
-      </a>
+      {member.profileUrl && (
+        <a class="member-link" href={member.profileUrl} target="_blank" rel="noopener noreferrer">
+          {member.profileLabel}<span aria-hidden="true">↗</span>
+        </a>
+      )}
+      {member.scholarUrl && (
+        <a class="member-link" href={member.scholarUrl} target="_blank" rel="noopener noreferrer">
+          Google Scholar<span aria-hidden="true">↗</span>
+        </a>
+      )}
     </div>
   </div>
 </article>

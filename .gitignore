@@ -5,3 +5,6 @@ dist/
 
 docs/
 tmp/
+
+# Original logo and photo files (web-ready copies live in public/assets/images)
+assets-source/

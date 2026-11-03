@@ -14,14 +14,15 @@ const strings = ui[locale];
 
 <header class:list={["site-header", { "site-header--overlay": overlay }]}>
   <div class="site-header__inner">
-    <a class="site-name" href={localizedPath(locale, "", base)}>TBLT<span>-Agent</span></a>
+    <a class="site-name" href={localizedPath(locale, "", base)}>TBLT<span>-Agent</span><small>SLA × NLP Research Project</small></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label={strings.openMenu} data-open-label={strings.openMenu} data-close-label={strings.closeMenu}>
       <span></span><span></span><span></span>
     </button>
     <nav id="primary-navigation" class="site-nav" aria-label={strings.primaryNavigation}>
       {navigation.map((item) => {
-        const isCurrent = currentRoute === item.href;
-        return <a href={localizedPath(locale, item.href, base)} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
+        const isCurrent = !item.hash && currentRoute === item.route;
+        const href = `${localizedPath(locale, item.route, base)}${item.hash ? `#${item.hash}` : ""}`;
+        return <a href={href} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
       })}
       <div class="language-switcher" aria-label={strings.languageNavigation}>
         <a href={localizedPath("en", currentRoute, base)} lang="en" hreflang="en" aria-current={locale === "en" ? "true" : undefined} aria-label={strings.switchToEnglish}>EN</a>

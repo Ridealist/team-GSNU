@@ -1,154 +1,375 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TeamGroups from "../components/TeamGroups.astro";
+import { publications } from "../data/publications";
 import type { Locale } from "../i18n/config";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const systemUrl = "https://tblt-agent.net/";
 
 const content = {
   ko: {
-    title: "TBLT-Agent · 과업 대화자로서의 생성형 AI",
-    description: "TBLT-Agent는 AI의 주도적·협력적 상호작용 역할이 한국 초등 EFL 학습자의 과업 수행과 언어 발달에 미치는 영향을 탐구합니다.",
-    heroDescription: "같은 과업에서도 AI가 <em>어떻게 상호작용하는가</em>에 따라 학습자의 참여와 언어 사용은 달라질 수 있습니다.",
-    roleStageLabel: "Dominant AI와 Collaborative AI 상호작용 역할 비교",
-    studyHeading: "AI가 무엇을 말하는가보다,<br /><span>어떤 관계로 말하는가</span>에 주목합니다.",
-    studyBody: "협력적 또래 상호작용은 과업 기반 언어 학습의 중요한 기반입니다. 현재 연구는 생성형 AI를 단순한 응답 도구가 아닌 <strong>과업 대화자(Task Interlocutor)</strong>로 보고, AI의 상호작용 역할이 한국 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 탐구합니다.",
-    questionsHeading: "현재 연구의<br />두 가지 질문",
-    questions: [
-      { id: "RQ 01", title: "GenAI의 과업 대화자 가능성", body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?" },
-      { id: "RQ 02", title: "AI 역할에 따른 차이", body: "서로 다른 AI 상호작용 역할은 초등 EFL 학습자의 과업 수행과 언어 발달에 어떤 영향을 미치는가?" },
+    title: "TBLT-Agent · 초등 EFL 교실을 위한 실시간 음성 AI 과업 대화자",
+    description: "TBLT-Agent는 제2언어 습득(SLA) 그룹과 자연어처리(NLP) 그룹이 함께 개발하는 초등 EFL 학습자용 실시간 음성 AI 과업 대화자입니다.",
+    subtitle: "음성 AI 과업 대화자",
+    intro: [
+      "<strong>TBLT-Agent</strong>는 <strong>제2언어 습득(SLA)</strong> 연구자와 <strong>자연어처리(NLP)</strong> 연구자가 함께 개발하는 실시간 음성 AI 시스템입니다. 과업 기반 언어교수법(TBLT)과 컴퓨터 지원 협력학습(CSCL)에 근거해, AI가 초등 EFL 학습자와 영어로 대화하며 과업을 함께 수행합니다.",
+      "AI를 단순한 응답 도구가 아닌 <strong>과업 대화자(Task Interlocutor)</strong>로 설계하고, AI의 상호작용 역할이 학습자의 과업 수행과 L2 학습에 미치는 영향을 실제 교실에서 연구합니다.",
     ],
-    rolesHeading: "하나의 AI,<br /><span>두 가지 상호작용 방식</span>",
-    rolesIntro: "Storch의 pair dynamics model을 바탕으로 대화형 AI의 역할을 두 조건으로 조작했습니다.",
-    dominantDescription: "AI가 상호작용을 주도하는 조건",
-    collaborativeDescription: "학습자와 AI가 상호작용을 함께 구성하는 조건",
-    dominantAria: "AI의 발화 비중이 큰 상호작용 패턴",
-    collaborativeAria: "학습자와 AI의 발화가 균형을 이루는 상호작용 패턴",
-    measuresHeading: "대화의 양상과<br />언어 학습의 변화",
-    measures: [
-      { value: "Turns", label: "총 발화 순서 수" },
-      { value: "Words", label: "발화당 평균 단어 수" },
-      { value: "Topics", label: "주제 개시 빈도" },
+    tryIt: "시스템 체험하기",
+    systemHeading: "System",
+    systemBody: "학습자 1명과 AI의 1:1 대화에서 출발해, 두 학습자의 협력을 AI가 지원하는 3자 대화로 확장하고 있습니다.",
+    systems: [
+      {
+        term: "System 01 · Realtime",
+        tags: ["In Classroom"],
+        visual: ["H", "↔", "AI"],
+        title: "Realtime Task Interlocutor",
+        body: "AI 캐릭터가 학습자 1명과 영어 말하기 과업을 실시간 음성으로 함께 수행합니다. AI의 상호작용 역할은 주도형 또는 협력형으로 설정합니다.",
+        details: [
+          { label: "참여자", body: "학습자 1명 · AI 1명" },
+          { label: "음성 처리", body: "OpenAI Realtime 모델 기반 실시간 대화" },
+          { label: "AI 역할", body: "주도형(Dominant) · 협력형(Collaborative) — Storch의 pair dynamics model" },
+        ],
+      },
+      {
+        term: "System 02 · Pipeline",
+        tags: ["In Development"],
+        visual: ["H", "H", "+", "AI"],
+        title: "Multiparty Tutor",
+        body: "두 학습자가 하나의 과업을 세 단계에 걸쳐 함께 발전시킵니다. 학습자끼리 대화하는 동안 AI는 기다리고, 두 학습자가 단계를 마치면 영어 튜터로서 함께 잘한 점을 짚은 뒤 학습자별 학습 포인트를 지도합니다.",
+        details: [
+          { label: "참여자", body: "학습자 2명 · AI 1명" },
+          { label: "음성 처리", body: "학습자별 음성 인식 → LLM → 음성 합성 파이프라인" },
+          { label: "설계", body: "단계 진행과 연습 횟수는 상태 기계가 관리하고, LLM은 대화 근거에 따른 피드백(review · encourage · repair · examples)을 생성. 학습자별 연습은 최대 2회" },
+        ],
+      },
+      {
+        term: "System 03 · Pipeline",
+        tags: ["Planned"],
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "Multiparty Facilitator",
+        body: "AI가 이름과 목소리를 가진 대화 안의 참여자, 영어에 능숙한 친구로서 두 학습자의 협력을 지원합니다. 매 순간 지금 말할지, 누구에게 말할지, 어떤 대화 행위가 필요한지를 판단하며, 학습자에게 발화 기회가 필요하면 기다립니다.",
+        details: [
+          { label: "참여자", body: "학습자 2명 · AI 1명" },
+          { label: "설계", body: "발화 해석(NLU) → 대화 상태 추적(DST) → 대화 행위 선택(Policy) → 문장 생성(NLG)" },
+          { label: "연구", body: "LLM 대화 행위 스키마 정의, 교사 주석 기반 LLM 평가자 검증, 상용 LLM의 개입 판단 벤치마크" },
+        ],
+      },
     ],
-    questionsOutcome: "질문하기의 정확도",
-    suggestionsOutcome: "제안 화행의 정확도",
-    futureBadge: "2학기 확장 연구",
-    nextHeading: "AI와 학습자의 대화에서,<br /><strong>AI가 매개하는 학습자 간 협업으로.</strong>",
-    nextBody: "현재 연구에서 축적한 AI 상호작용 역할 설계를 바탕으로, 다음 단계에서는 AI가 두 학생 사이의 협업을 어떻게 매개하는지 탐구합니다.",
-    evolutionAria: "현재 연구와 2학기 확장 연구 비교",
-    currentEvolution: "Dominant vs Collaborative 역할이 과업 수행과 L2 학습에 미치는 영향",
-    futureEvolution: "학생 2명과 AI 1명으로 구성된 모둠에서 AI가 학습자 간 협업을 매개하는 방식",
+    accessEyebrow: "Get Started",
+    accessHeading: "How to access",
+    accessBody: "아래 테스트 계정으로 학습자 경험을 직접 확인할 수 있습니다.",
+    accessSteps: [
+      { title: "학습자 시스템 열기", body: "아래 주소를 열어 TBLT-Agent 로그인 화면으로 이동합니다." },
+      { title: "테스트 계정 입력", body: "학생용 테스트 계정 정보를 각 입력란에 입력합니다." },
+      { title: "영어 과업 시작", body: "안내에 따라 마이크 사용을 허용하고 실시간 음성 과업을 시작합니다." },
+    ],
+    credentials: [
+      { label: "학번", value: "99999" },
+      { label: "이름", value: "test" },
+      { label: "Access code", value: "aa00" },
+    ],
+    browserNote: "마이크가 연결된 Chrome 기반 브라우저를 권장합니다.",
+    openSystem: "시스템 접속하기",
+    studiesHeading: "Studies",
+    studiesBody: "TBLT-Agent를 실제 초등 EFL 교실에 적용해 수행하는 연구입니다.",
+    studies: [
+      {
+        term: "Study 01 · 2026 Spring",
+        visual: ["H", "↔", "AI"],
+        title: "AI 상호작용 역할: 주도형 vs 협력형",
+        body: "Storch의 pair dynamics model을 바탕으로 AI의 역할을 두 조건으로 조작하고, 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 비교합니다.",
+        tags: ["In Classroom", "AAAL 2027"],
+        details: [
+          { label: "RQ1", body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?" },
+          { label: "RQ2", body: "서로 다른 AI 상호작용 역할은 과업 수행과 언어 발달에 어떤 영향을 미치는가?" },
+          { label: "측정", body: "발화 순서 수, 발화당 평균 단어 수, 주제 개시 빈도, 질문하기 · 제안 화행 정확도(사전-사후)" },
+        ],
+      },
+      {
+        term: "Study 02 · 2026 Fall",
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "When, to Whom, and How LLM Participates?",
+        body: "두 학습자의 영어 협력 대화에 LLM이 참여할 때, 언제 말할지 · 누구에게 말할지 · 어떤 대화 행위를 할지에 대한 교육적 판단 기준을 세웁니다. 실제 초등 EFL 교실에서 학생-학생-AI 대화를 수집해 데이터셋과 벤치마크를 구축합니다.",
+        tags: ["In Progress", "Dataset & Benchmark"],
+        details: [
+          { label: "RQ1", body: "EFL 환경에서 어린 학습자 간 협력적 언어 학습을 촉진하기 위한 LLM의 대화 행위 스키마는 어떻게 정의될 수 있는가?" },
+          { label: "RQ2", body: "LLM 평가자는 이 스키마에 따라 LLM 대화 행위의 적절성을 얼마나 교사와 유사하게 평가하는가?" },
+          { label: "RQ3", body: "Off-the-shelf LLM은 개입 시점과 대화 행위를 얼마나 적절하게 선택하는가?" },
+          { label: "방법", body: "초등 EFL 4개 반 약 100명의 학생-학생-AI 대화 수집 → 1차 스키마 도출 → 교사 피드백·주석으로 확정 → GPT · Claude · Gemini · Llama · Qwen 등 비교" },
+        ],
+      },
+    ],
+    teamHeading: "Team",
+    teamBody: "SLA 그룹은 과업과 상호작용 역할을 이론에 근거해 설계하고, NLP 그룹은 이를 실시간 음성 시스템으로 구현합니다.",
+    publicationsHeading: "Publications",
   },
   en: {
-    title: "TBLT-Agent · Generative AI as a Task Interlocutor",
-    description: "TBLT-Agent explores how dominant and collaborative conversational AI roles influence Korean elementary EFL learners' task performance and language development.",
-    heroDescription: "Even within the same task, <em>how AI interacts</em> can shape learners’ participation and language use.",
-    roleStageLabel: "Comparison of dominant and collaborative AI interaction roles",
-    studyHeading: "Beyond what AI says,<br /><span>we focus on how it relates.</span>",
-    studyBody: "Collaborative peer interaction is a core foundation of task-based language learning. This study views generative AI not simply as a response tool but as a <strong>Task Interlocutor</strong>, examining how its interactional role influences task performance and L2 learning among Korean elementary EFL learners.",
-    questionsHeading: "Two questions<br />guiding our study",
-    questions: [
-      { id: "RQ 01", title: "GenAI as a task interlocutor", body: "How can generative AI support learners’ active task engagement during interactional tasks?" },
-      { id: "RQ 02", title: "Differences across AI roles", body: "How do different AI interactional roles affect elementary EFL learners’ task performance and language development?" },
+    title: "TBLT-Agent · A Real-Time Voice AI Task Interlocutor for Elementary EFL",
+    description: "TBLT-Agent is a real-time voice AI task interlocutor for elementary EFL learners, built jointly by a second language acquisition (SLA) group and a natural language processing (NLP) group.",
+    subtitle: "Voice AI Task Interlocutor",
+    intro: [
+      "<strong>TBLT-Agent</strong> is a collaborative effort of <strong>second language acquisition (SLA)</strong> and <strong>natural language processing (NLP)</strong> researchers to build a real-time voice AI system. Grounded in task-based language teaching (TBLT) and computer-supported collaborative learning (CSCL), the AI carries out communicative tasks with elementary EFL learners in spoken English.",
+      "We design the AI not as a response tool but as a <strong>Task Interlocutor</strong>, and study in real classrooms how its interactional role shapes learners’ task performance and L2 learning.",
     ],
-    rolesHeading: "One AI,<br /><span>two ways of interacting</span>",
-    rolesIntro: "Drawing on Storch’s pair dynamics model, we operationalized two distinct roles for conversational AI.",
-    dominantDescription: "A condition in which AI leads the interaction",
-    collaborativeDescription: "A condition in which learners and AI co-construct the interaction",
-    dominantAria: "Interaction pattern with a larger proportion of AI talk",
-    collaborativeAria: "Interaction pattern with balanced learner and AI talk",
-    measuresHeading: "Interaction patterns<br />and changes in learning",
-    measures: [
-      { value: "Turns", label: "Total number of turns" },
-      { value: "Words", label: "Mean words per turn" },
-      { value: "Topics", label: "Topic initiation frequency" },
+    tryIt: "Try the System",
+    systemHeading: "System",
+    systemBody: "Starting from one-on-one learner–AI conversation, TBLT-Agent is expanding into three-party dialogue in which the AI supports collaboration between two learners.",
+    systems: [
+      {
+        term: "System 01 · Realtime",
+        tags: ["In Classroom"],
+        visual: ["H", "↔", "AI"],
+        title: "Realtime Task Interlocutor",
+        body: "An AI character carries out a spoken English task with one learner in real time. Its interactional role is set to either dominant or collaborative.",
+        details: [
+          { label: "Participants", body: "1 learner · 1 AI" },
+          { label: "Voice", body: "Real-time conversation on the OpenAI Realtime model" },
+          { label: "AI role", body: "Dominant · Collaborative — after Storch’s pair dynamics model" },
+        ],
+      },
+      {
+        term: "System 02 · Pipeline",
+        tags: ["In Development"],
+        visual: ["H", "H", "+", "AI"],
+        title: "Multiparty Tutor",
+        body: "Two learners develop one task together over three steps. The AI waits while they talk; once both finish a step, it speaks as an English tutor, noting what they did well together and then coaching each learner on one learning point.",
+        details: [
+          { label: "Participants", body: "2 learners · 1 AI" },
+          { label: "Voice", body: "Per-learner speech recognition → LLM → speech synthesis pipeline" },
+          { label: "Design", body: "A state machine controls steps and practice turns; the LLM generates grounded feedback (review · encourage · repair · examples). Up to two practice tries per learner" },
+        ],
+      },
+      {
+        term: "System 03 · Pipeline",
+        tags: ["Planned"],
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "Multiparty Facilitator",
+        body: "The AI joins the peer conversation as a participant with its own name and voice — a more proficient English-speaking friend who supports the two learners’ collaboration. At each moment it decides when to speak, to whom, and with which dialogue act, and waits when the learners need the floor.",
+        details: [
+          { label: "Participants", body: "2 learners · 1 AI" },
+          { label: "Design", body: "Utterance understanding (NLU) → dialogue state tracking (DST) → dialogue act selection (Policy) → response generation (NLG)" },
+          { label: "Research", body: "A dialogue act schema for the LLM, LLM evaluators validated against teacher annotations, and a benchmark of off-the-shelf LLMs’ intervention decisions" },
+        ],
+      },
     ],
-    questionsOutcome: "Accuracy of question formation",
-    suggestionsOutcome: "Accuracy of suggestion speech acts",
-    futureBadge: "Fall semester extension",
-    nextHeading: "From learner–AI dialogue<br /><strong>to AI-mediated peer collaboration.</strong>",
-    nextBody: "Building on the interactional role designs developed in the current study, the next phase will investigate how AI mediates collaboration between two learners.",
-    evolutionAria: "Comparison of the current study and the fall semester extension",
-    currentEvolution: "How dominant and collaborative roles affect task performance and L2 learning",
-    futureEvolution: "How AI mediates collaboration in a group of two learners and one AI agent",
+    accessEyebrow: "Get Started",
+    accessHeading: "How to access",
+    accessBody: "Use the test account below to experience the system as a learner.",
+    accessSteps: [
+      { title: "Open the learner system", body: "Follow the link below to open the TBLT-Agent login screen." },
+      { title: "Enter the test account", body: "Enter the student test account details in the corresponding fields." },
+      { title: "Start the English task", body: "Allow microphone access when prompted, then begin the real-time voice task." },
+    ],
+    credentials: [
+      { label: "Student ID", value: "99999" },
+      { label: "Name", value: "test" },
+      { label: "Access code", value: "aa00" },
+    ],
+    browserNote: "A Chromium-based browser with a connected microphone is recommended.",
+    openSystem: "Open the system",
+    studiesHeading: "Studies",
+    studiesBody: "Studies conducted by deploying TBLT-Agent in elementary EFL classrooms.",
+    studies: [
+      {
+        term: "Study 01 · 2026 Spring",
+        visual: ["H", "↔", "AI"],
+        title: "AI Interactional Roles: Dominant vs Collaborative",
+        body: "Drawing on Storch’s pair dynamics model, we manipulate the AI’s role across two conditions and compare effects on elementary EFL learners’ task performance and L2 learning.",
+        tags: ["In Classroom", "AAAL 2027"],
+        details: [
+          { label: "RQ1", body: "How can generative AI support learners’ active task engagement during interactional tasks?" },
+          { label: "RQ2", body: "How do different AI interactional roles affect task performance and language development?" },
+          { label: "Measures", body: "Total turns, mean words per turn, topic initiations, accuracy of questions and suggestions (pre–post)" },
+        ],
+      },
+      {
+        term: "Study 02 · 2026 Fall",
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "When, to Whom, and How LLM Participates?",
+        body: "We establish pedagogical criteria for when an LLM should speak, to whom, and with which dialogue act as it joins two learners’ collaborative English dialogue. Collecting learner–learner–AI conversations in real elementary EFL classrooms, we build a dataset and benchmark.",
+        tags: ["In Progress", "Dataset & Benchmark"],
+        details: [
+          { label: "RQ1", body: "How can a dialogue act schema be defined for an LLM that facilitates collaborative language learning among young EFL learners?" },
+          { label: "RQ2", body: "How closely do LLM evaluators match teachers when judging the appropriateness of LLM dialogue acts under this schema?" },
+          { label: "RQ3", body: "How appropriately do off-the-shelf LLMs choose when to intervene and which dialogue act to use?" },
+          { label: "Methods", body: "Learner–learner–AI dialogues from ~100 students in four elementary EFL classes → initial schema → finalized with teacher feedback and annotation → comparison of GPT, Claude, Gemini, Llama, Qwen, and others" },
+        ],
+      },
+    ],
+    teamHeading: "Team",
+    teamBody: "The SLA group grounds tasks and interactional roles in theory; the NLP group turns them into a real-time voice system.",
+    publicationsHeading: "Publications",
   },
 } as const;
 
 const copy = content[locale];
+// Open on the most recent study; earlier ones stay one tab away.
+const latestStudy = copy.studies.length - 1;
+const institutions = [
+  { name: "Georgia State University", file: "gsu.jpg", height: 76, emblem: false },
+  { name: "Seoul National University", file: "snu.png", height: 48, emblem: true },
+  { name: "KAIST", file: "kaist.png", height: 32, emblem: false },
+  { name: "Cheongju National University of Education", file: "cnue.svg", height: 48, emblem: true },
+];
+const tagTone: Record<string, string> = { "In Classroom": "green", "In Development": "blue", Planned: "purple", "AAAL 2027": "red", "In Progress": "blue", "Dataset & Benchmark": "purple" };
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.description} overlayHeader>
-  <section class="tblt-hero current-hero">
-    <div class="tblt-hero__grid section-shell">
-      <div class="tblt-hero__copy">
-        <h1>TBLT<span>-Agent</span></h1>
-        <p class="current-hero__title">Generative AI as a<br /><strong>Task Interlocutor</strong></p>
-        <p class="tblt-hero__description" set:html={copy.heroDescription} />
+<BaseLayout locale={locale} title={copy.title} description={copy.description}>
+  <div class="rp">
+    <section class="rp-hero" id="overview">
+      <div class="rp-container">
+        <h1>TBLT-Agent<span>{copy.subtitle}</span></h1>
+        <div class="rp-hero__intro">{copy.intro.map((paragraph) => <p set:html={paragraph} />)}</div>
+        <div class="rp-actions">
+          <a class="rp-button" href="#get-started"><span class="rp-button__icon" aria-hidden="true">▶</span><span>{copy.tryIt}</span></a>
+        </div>
+        <ul class="rp-logos">
+          {institutions.map((institution) => (
+            <li>
+              <img src={`${base}assets/images/logos/${institution.file}`} alt={institution.name} height={institution.height} style={`height:${institution.height}px`} loading="lazy" />
+              {institution.emblem && <span>{institution.name}</span>}
+            </li>
+          ))}
+        </ul>
       </div>
+    </section>
 
-      <div class="role-stage" aria-label={copy.roleStageLabel}>
-        <p class="role-stage__label">SAME TASK · DIFFERENT ROLE</p>
-        <div class="role-stage__axis" aria-hidden="true"><span></span></div>
-        <div class="role-stage__option role-stage__option--dominant"><span>ROLE 01</span><strong>DOMINANT</strong><small>AI-led interaction</small></div>
-        <div class="role-stage__agent"><span>AI</span><b>VOICE</b></div>
-        <div class="role-stage__option role-stage__option--collaborative"><span>ROLE 02</span><strong>COLLABORATIVE</strong><small>Shared interaction</small></div>
+    <section class="rp-section rp-section--tinted" id="system" aria-labelledby="system-heading">
+      <div class="rp-container">
+        <header class="rp-section__header">
+          <h2 id="system-heading">{copy.systemHeading}</h2>
+          <p>{copy.systemBody}</p>
+        </header>
+        <ol class="rp-systems">
+          {copy.systems.map((system) => (
+            <li class="rp-card rp-system">
+              <div class="rp-study__visual" aria-hidden="true">
+                {system.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+              </div>
+              <p class="rp-system__term">{system.term}</p>
+              <h3>{system.title}</h3>
+              <ul class="rp-tags">{system.tags.map((tag) => <li data-tone={tagTone[tag]}>{tag}</li>)}</ul>
+              <p>{system.body}</p>
+              <dl class="rp-study__details">
+                {system.details.map((detail) => <div><dt>{detail.label}</dt><dd>{detail.body}</dd></div>)}
+              </dl>
+            </li>
+          ))}
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="project-statement section-shell">
-    <p class="section-index">01 · THE STUDY</p>
-    <div><h2 set:html={copy.studyHeading} /><p set:html={copy.studyBody} /></div>
-  </section>
-
-  <section class="questions-section current-questions">
-    <div class="section-shell">
-      <div class="section-heading"><p class="section-index">02 · RESEARCH QUESTIONS</p><h2 set:html={copy.questionsHeading} /></div>
-      <div class="question-list">
-        {copy.questions.map((question) => <article><span>{question.id}</span><div><h3>{question.title}</h3><p>{question.body}</p></div></article>)}
+    <section class="rp-section" id="get-started" aria-labelledby="access-heading">
+      <div class="rp-container">
+        <header class="rp-section__header">
+          <p class="rp-eyebrow">{copy.accessEyebrow}</p>
+          <h2 id="access-heading">{copy.accessHeading}</h2>
+          <p>{copy.accessBody}</p>
+        </header>
+        <ol class="rp-steps">
+          {copy.accessSteps.map((step, index) => (
+            <li class="rp-card">
+              <span class="rp-steps__number">STEP 0{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              {index === 0 && <a href={systemUrl} target="_blank" rel="noopener noreferrer">tblt-agent.net <span aria-hidden="true">↗</span></a>}
+              {index === 1 && (
+                <dl class="rp-credentials">
+                  {copy.credentials.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+                </dl>
+              )}
+              {index === 2 && <small>{copy.browserNote}</small>}
+            </li>
+          ))}
+        </ol>
+        <div class="rp-actions">
+          <a class="rp-button" href={systemUrl} target="_blank" rel="noopener noreferrer"><span>{copy.openSystem}</span><span aria-hidden="true">↗</span></a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="study-section section-shell current-design">
-    <div class="section-heading section-heading--wide">
-      <p class="section-index">03 · INTERACTIONAL ROLES</p><h2 set:html={copy.rolesHeading} /><p>{copy.rolesIntro}</p>
-    </div>
-    <div class="role-comparison">
-      <article class="role-condition role-condition--dominant">
-        <div class="role-condition__top"><span>CONDITION A</span><b>01</b></div><h3>Dominant AI</h3><p>{copy.dominantDescription}</p>
-        <div class="talk-pattern" aria-label={copy.dominantAria}><i class="human">LEARNER</i><span></span><i class="ai">AI</i></div>
-      </article>
-      <article class="role-condition role-condition--collaborative">
-        <div class="role-condition__top"><span>CONDITION B</span><b>02</b></div><h3>Collaborative AI</h3><p>{copy.collaborativeDescription}</p>
-        <div class="talk-pattern talk-pattern--balanced" aria-label={copy.collaborativeAria}><i class="human">LEARNER</i><span></span><i class="ai">AI</i></div>
-      </article>
-    </div>
-  </section>
-
-  <section class="measures-section section-shell">
-    <div class="section-heading"><p class="section-index">04 · WHAT WE MEASURE</p><h2 set:html={copy.measuresHeading} /></div>
-    <div class="measure-content">
-      <p class="measure-label">TASK PERFORMANCE</p>
-      <div class="measure-grid">{copy.measures.map((measure) => <article><strong>{measure.value}</strong><span>{measure.label}</span></article>)}</div>
-      <div class="learning-outcome">
-        <p class="measure-label">LEARNING OUTCOMES</p>
-        <div><strong>Questions</strong><span>{copy.questionsOutcome}</span></div>
-        <div><strong>Suggestions</strong><span>{copy.suggestionsOutcome}</span></div>
-        <small>Pretest - Posttest production accuracy</small>
+    <section class="rp-section" id="studies" aria-labelledby="studies-heading">
+      <div class="rp-container">
+        <header class="rp-section__header">
+          <h2 id="studies-heading">{copy.studiesHeading}</h2>
+          <p>{copy.studiesBody}</p>
+        </header>
+        <div class="rp-tabs" role="tablist" aria-labelledby="studies-heading">
+          {copy.studies.map((study, index) => (
+            <button type="button" role="tab" id={`study-tab-${index}`} aria-controls={`study-panel-${index}`} aria-selected={index === latestStudy} tabindex={index === latestStudy ? 0 : -1}>{study.term}</button>
+          ))}
+        </div>
+        {copy.studies.map((study, index) => (
+          <article class="rp-card rp-study" role="tabpanel" id={`study-panel-${index}`} aria-labelledby={`study-tab-${index}`} hidden={index !== latestStudy}>
+            <div class="rp-study__visual" aria-hidden="true">
+              {study.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+            </div>
+            <p class="rp-study__term">{study.term}</p>
+            <h3>{study.title}</h3>
+            <p>{study.body}</p>
+            <ul class="rp-tags">{study.tags.map((tag) => <li data-tone={tagTone[tag]}>{tag}</li>)}</ul>
+            <dl class="rp-study__details">
+              {study.details.map((detail) => <div><dt>{detail.label}</dt><dd>{detail.body}</dd></div>)}
+            </dl>
+          </article>
+        ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="next-phase section-shell">
-    <div class="next-phase__intro">
-      <p class="section-index">05 · NEXT PHASE · 2026 FALL</p><span class="future-badge">{copy.futureBadge}</span>
-      <h2 set:html={copy.nextHeading} /><p>{copy.nextBody}</p>
-    </div>
-    <div class="research-evolution" aria-label={copy.evolutionAria}>
-      <article><span>NOW · SPRING SEMESTER</span><div class="evolution-diagram"><i>H</i><b>↔</b><i class="ai">AI</i></div><h3>Human-AI Interaction</h3><p>{copy.currentEvolution}</p></article>
-      <b class="evolution-arrow" aria-hidden="true">→</b>
-      <article class="future"><span>NEXT · FALL SEMESTER</span><div class="evolution-diagram"><i>H</i><b>↔</b><i>H</i><b>+</b><i class="ai">AI</i></div><h3>AI-Mediated Peer Interaction</h3><p>{copy.futureEvolution}</p></article>
-    </div>
-  </section>
+    <section class="rp-section rp-section--team" id="team" aria-labelledby="team-heading">
+      <div class="rp-container">
+        <header class="rp-section__header">
+          <h2 id="team-heading">{copy.teamHeading}</h2>
+          <p>{copy.teamBody}</p>
+        </header>
+        <TeamGroups />
+      </div>
+    </section>
+
+    <section class="rp-section" id="publications" aria-labelledby="publications-heading">
+      <div class="rp-container">
+        <header class="rp-section__header"><h2 id="publications-heading">{copy.publicationsHeading}</h2></header>
+        <ul class="rp-list">
+          {publications.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <br />{item.authors}
+              <br /><em>{item.venue}</em>, ({item.status}){item.indexing && ` [${item.indexing}]`}
+              {item.link && <> (<a href={item.link} target="_blank" rel="noopener noreferrer">Link</a>)</>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  for (const tablist of document.querySelectorAll<HTMLElement>(".rp-tabs")) {
+    const tabs = [...tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const select = (next: HTMLButtonElement) => {
+      for (const tab of tabs) {
+        const selected = tab === next;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        document.getElementById(tab.getAttribute("aria-controls")!)!.hidden = !selected;
+      }
+      next.focus();
+    };
+    tablist.addEventListener("click", (event) => {
+      const tab = (event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
+      if (tab) select(tab);
+    });
+    tablist.addEventListener("keydown", (event) => {
+      const offset = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+      if (!offset) return;
+      const current = tabs.indexOf(document.activeElement as HTMLButtonElement);
+      select(tabs[(current + offset + tabs.length) % tabs.length]);
+      event.preventDefault();
+    });
+  }
+</script>
