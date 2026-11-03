@@ -5,4 +5,4 @@ import { ui } from "../i18n/ui";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 ---
-<footer class="site-footer"><span>TBLT-Agent</span><small>{ui[locale].footerDescription}</small></footer>
+<footer class="site-footer"><span>TBLT-Agent</span><small>{ui[locale].footerDescription}</small><small>{ui[locale].footerRegistration}</small></footer>

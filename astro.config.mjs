@@ -19,7 +19,9 @@ export default defineConfig({
   redirects: {
     "/": `${redirectBase}/en/`,
     "/members": `${redirectBase}/en/members/`,
-    "/system": `${redirectBase}/en/system/`,
+    "/system": `${redirectBase}/en/#get-started`,
+    "/en/system": `${redirectBase}/en/#get-started`,
+    "/ko/system": `${redirectBase}/ko/#get-started`,
     "/research-work": `${redirectBase}/en/research-work/`,
   },
   i18n: {
