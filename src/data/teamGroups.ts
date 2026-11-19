@@ -1,4 +1,4 @@
-export type GroupId = "sla" | "nlp";
+export type GroupId = "sla" | "developer" | "nlp";
 
 export interface TeamGroup {
   id: GroupId;
@@ -9,6 +9,10 @@ export const teamGroups: Record<GroupId, TeamGroup> = {
   sla: {
     id: "sla",
     label: "SLA Group",
+  },
+  developer: {
+    id: "developer",
+    label: "Developer / Practitioner",
   },
   nlp: {
     id: "nlp",

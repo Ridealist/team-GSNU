@@ -4,15 +4,16 @@ import { teamGroups } from "../data/teamGroups";
 
 const base = import.meta.env.BASE_URL;
 
-// Members in both groups close the SLA list and open the NLP list.
+// Members with multiple roles appear first in the NLP list.
 const inGroup = (id: keyof typeof teamGroups) =>
   members
     .filter((member) => !member.lead && member.groups.includes(id))
+    .map((member) => ({ ...member, ...member.groupAffiliations?.[id] }))
     .sort((a, b) => (id === "sla" ? 1 : -1) * (a.groups.length - b.groups.length));
 
 const sections = [
   { id: "faculty", title: "Faculty", people: members.filter((member) => member.lead) },
-  ...[teamGroups.sla, teamGroups.nlp].map((group) => ({
+  ...[teamGroups.sla, teamGroups.developer, teamGroups.nlp].map((group) => ({
     id: group.id,
     title: group.label,
     people: inGroup(group.id),
@@ -27,7 +28,7 @@ const links = (member: Member) => [
 
 <div class="rp-team">
   {sections.map((section) => (
-    <section class="rp-team__section" aria-labelledby={`team-${section.id}`}>
+    <section class:list={["rp-team__section", { "rp-team__section--wide": section.id === "faculty" || section.id === "nlp" }]} aria-labelledby={`team-${section.id}`}>
       <h3 id={`team-${section.id}`}>{section.title}</h3>
       <ul class:list={["rp-team__people", { "rp-team__people--faculty": section.id === "faculty" }]}>
         {section.people.map((member) => (

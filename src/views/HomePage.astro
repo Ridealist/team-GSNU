@@ -16,22 +16,22 @@ const content = {
     subtitle: "음성 AI 과업 대화자",
     intro: [
       "<strong>TBLT-Agent</strong>는 <strong>제2언어 습득(SLA)</strong> 연구자와 <strong>자연어처리(NLP)</strong> 연구자가 함께 개발하는 실시간 음성 AI 시스템입니다. 과업 기반 언어교수법(TBLT)과 컴퓨터 지원 협력학습(CSCL)에 근거해, AI가 초등 EFL 학습자와 영어로 대화하며 과업을 함께 수행합니다.",
-      "AI를 단순한 응답 도구가 아닌 <strong>과업 대화자(Task Interlocutor)</strong>로 설계하고, AI의 상호작용 역할이 학습자의 과업 수행과 L2 학습에 미치는 영향을 실제 교실에서 연구합니다.",
+      "AI를 <strong>과업 대화자(Task Interlocutor)</strong>이자 <strong>협력 파트너(Collaborative Partner)</strong>로 설계하고, AI의 상호작용 역할이 학습자의 과업 수행과 L2 학습에 미치는 영향을 실제 교실에서 연구합니다.",
     ],
     tryIt: "시스템 체험하기",
     systemHeading: "System",
-    systemBody: "학습자 1명과 AI의 1:1 대화에서 출발해, 두 학습자의 협력을 AI가 지원하는 3자 대화로 확장하고 있습니다.",
+    systemBody: "TBLT-Agent는 <a href=\"https://livekit.com/\" target=\"_blank\" rel=\"noopener noreferrer\">LiveKit</a>을 통해 브라우저 기반 영어 학습 활동과 Python 음성 에이전트를 연결합니다. <a href=\"https://nextjs.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Next.js</a> 애플리케이션은 학생용 과업 인터페이스와 교사용 제어 기능을 제공하고, <a href=\"https://supabase.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Supabase</a>는 설정과 세션 데이터를 저장합니다. 세 시스템은 이 플랫폼을 공유하지만, 음성을 처리하고 대화를 제어하는 방식이 다릅니다.",
     systems: [
       {
         term: "System 01 · Realtime",
         tags: ["In Classroom"],
         visual: ["H", "↔", "AI"],
         title: "Realtime Task Interlocutor",
-        body: "AI 캐릭터가 학습자 1명과 영어 말하기 과업을 실시간 음성으로 함께 수행합니다. AI의 상호작용 역할은 주도형 또는 협력형으로 설정합니다.",
+        body: "AI 캐릭터가 학습자 1명과 함께 영어 말하기 과업을 완수하며, 상호작용을 주도하거나 협력 파트너로서 주도권을 나눕니다.",
         details: [
-          { label: "참여자", body: "학습자 1명 · AI 1명" },
-          { label: "음성 처리", body: "OpenAI Realtime 모델 기반 실시간 대화" },
-          { label: "AI 역할", body: "주도형(Dominant) · 협력형(Collaborative) — Storch의 pair dynamics model" },
+          { label: "Interaction", body: "학습자 1명 ↔ AI 1명" },
+          { label: "Speech Processing", body: "OpenAI Realtime을 활용해 음성을 입력받아 음성으로 응답하는 상호작용." },
+          { label: "Dialogue Control", body: "Realtime 모델은 캐릭터 지침, 현재 적용된 과업 카드, 상호작용 방식, 교정 피드백 조건을 조합한 프롬프트 설정에 따라 대화 응답을 생성합니다. 주도형과 협력형은 AI가 참여하는 방식을 안내하며, 명시적 교정은 상호작용 방식과 별도로 설정합니다." },
         ],
       },
       {
@@ -39,23 +39,23 @@ const content = {
         tags: ["In Development"],
         visual: ["H", "H", "+", "AI"],
         title: "Multiparty Tutor",
-        body: "두 학습자가 하나의 과업을 세 단계에 걸쳐 함께 발전시킵니다. 학습자끼리 대화하는 동안 AI는 기다리고, 두 학습자가 단계를 마치면 영어 튜터로서 함께 잘한 점을 짚은 뒤 학습자별 학습 포인트를 지도합니다.",
+        body: "두 학습자가 구조화된 말하기 활동을 함께 수행합니다. AI는 활동 순서를 관리하고 제출 시점에 개별 언어 피드백을 제공합니다.",
         details: [
-          { label: "참여자", body: "학습자 2명 · AI 1명" },
-          { label: "음성 처리", body: "학습자별 음성 인식 → LLM → 음성 합성 파이프라인" },
-          { label: "설계", body: "단계 진행과 연습 횟수는 상태 기계가 관리하고, LLM은 대화 근거에 따른 피드백(review · encourage · repair · examples)을 생성. 학습자별 연습은 최대 2회" },
+          { label: "Interaction", body: "학습자 2명의 짝 대화 · AI 튜터 1명" },
+          { label: "Speech Processing", body: "학습자별 음성 인식 → 활동 또는 연습 결과 제출 → LLM 기반 피드백 → 음성 합성" },
+          { label: "Dialogue Control", body: "서버 측 상태 기계가 활동, 제출, 연습 차례를 관리합니다. LLM은 각 학습자가 제출한 발화를 평가하고 피드백과 다음 행동을 제안합니다. 서버는 진행하기 전에 현재 학습자, 활동, 연습 제한에 비추어 제안을 검증합니다. 교정 연습은 지정된 언어 형식에서 실제로 발생한 오류를 대상으로 합니다." },
         ],
       },
       {
         term: "System 03 · Pipeline",
-        tags: ["Planned"],
+        tags: ["Research Prototype"],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "Multiparty Facilitator",
-        body: "AI가 이름과 목소리를 가진 대화 안의 참여자, 영어에 능숙한 친구로서 두 학습자의 협력을 지원합니다. 매 순간 지금 말할지, 누구에게 말할지, 어떤 대화 행위가 필요한지를 판단하며, 학습자에게 발화 기회가 필요하면 기다립니다.",
+        body: "AI 파트너는 요청에 답하고, 학습자에게 자신의 생각을 설명하도록 질문하며, 서로의 말에 응답하도록 유도해 공동 과업을 지원합니다.",
         details: [
-          { label: "참여자", body: "학습자 2명 · AI 1명" },
-          { label: "설계", body: "발화 해석(NLU) → 대화 상태 추적(DST) → 대화 행위 선택(Policy) → 문장 생성(NLG)" },
-          { label: "연구", body: "LLM 대화 행위 스키마 정의, 교사 주석 기반 LLM 평가자 검증, 상용 LLM의 개입 판단 벤치마크" },
+          { label: "Interaction", body: "학습자 2명의 짝 대화 · AI 촉진자 1명" },
+          { label: "Speech Processing", body: "학습자별 음성 인식 → LLM 기반 발화 이해 → 대화 상태 추적 → 규칙 기반 정책 → LLM 기반 응답 생성 → 음성 합성." },
+          { label: "Dialogue Control", body: "이벤트 기반 상태 추적기가 과업과 대화 상태를 유지합니다. 발화 차례의 종료나 침묵 같은 의사결정 시점에 규칙 기반 정책이 발화 여부, 수행할 대화 행위, 발화 대상을 선택합니다. LLM은 허용된 과업 정보 안에서 선택된 행동을 언어로 표현합니다. 학습자의 발화나 상태 변화로 개입이 더 이상 유효하지 않으면 대기 중이거나 진행 중인 응답을 취소합니다." },
         ],
       },
     ],
@@ -79,22 +79,42 @@ const content = {
     studies: [
       {
         term: "Study 01 · 2026 Spring",
+        statuses: [{ label: "완료", tone: "green" }, { label: "데이터 분석 중", tone: "blue" }],
         visual: ["H", "↔", "AI"],
-        title: "AI 상호작용 역할: 주도형 vs 협력형",
-        body: "Storch의 pair dynamics model을 바탕으로 AI의 역할을 두 조건으로 조작하고, 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 비교합니다.",
-        tags: ["In Classroom", "AAAL 2027"],
+        title: "AI 상호작용 역할과 교정 피드백",
+        body: "Storch의 pair dynamics model (2008)에 따른 AI의 상호작용 역할(주도형 · 협력형)과 구두 교정 피드백(Corrective Feedback) 제공 여부를 조합한 네 조건에서, 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 비교합니다.",
         details: [
           { label: "RQ1", body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?" },
-          { label: "RQ2", body: "서로 다른 AI 상호작용 역할은 과업 수행과 언어 발달에 어떤 영향을 미치는가?" },
-          { label: "측정", body: "발화 순서 수, 발화당 평균 단어 수, 주제 개시 빈도, 질문하기 · 제안 화행 정확도(사전-사후)" },
+          { label: "RQ2", body: "AI 상호작용 역할과 구두 교정 피드백은 과업 중 질문하기 · 제안 화행 사용과 이후 학습 성과에 어떤 영향을 미치는가?" },
+          { label: "참여자", body: "한국 초등학생 90명" },
+          { label: "실험 조건", body: "주도형 / 협력형 AI × 구두 교정 피드백 제공 / 미제공 — 총 4개 조건" },
+          { label: "진행 절차", body: "3주간 진행: 사전검사 → 상호작용 과업 3회 → 사후검사 + 종료 설문" },
+          { label: "측정", body: "발화 순서 수, 발화당 평균 단어 수, 주제 개시 빈도, 과업 중 질문하기 · 제안 화행 사용 및 정확도, 사전-사후 정확도 변화" },
         ],
       },
       {
         term: "Study 02 · 2026 Fall",
+        visualConditions: [
+          { label: "1반 · 학습자–학습자", tokens: ["H", "H"] },
+          { label: "2–3반 · AI 과업 참여자", tokens: ["H", "↔", "AI"] },
+          { label: "4반 · AI 튜터", tokens: ["H", "H", "+", "AI"] },
+        ],
+        statuses: [{ label: "진행 중", tone: "blue" }],
+        visual: ["H", "H", "+", "AI"],
+        title: "짝 활동에서의 AI 튜터링과 과업 참여",
+        body: "2026년 10–11월, L9 과업을 통해 학습자끼리의 짝 활동, AI가 짝 역할을 맡는 과업, AI 튜터가 지원하는 짝 활동을 비교합니다. AI 과업 참여 조건에서는 명시적 피드백 제공 여부도 비교합니다.",
+        details: [
+          { label: "참여자", body: "한국 초등학생 90명 · 4개 반" },
+          { label: "실험 조건", body: "1반 · 학습자–학습자 짝 활동: 두 학생이 서로 대화하며 과업 수행\n\n2–3반 · 학습자–AI 짝 활동: AI가 과업 참여자(Learner B) 역할. 명시적 피드백 제공 / 미제공 조건 비교\n\n4반 · 학습자–학습자 + AI 튜터: 목표 언어 형식의 오류에 먼저 피드백과 튜터링 제공. 질문은 학습자가 먼저 시작" },
+          { label: "진행 절차", body: "2주간 진행: 사전검사 → 상호작용 과업 3회 → 사후검사 + 종료 설문" },
+        ],
+      },
+      {
+        term: "Study 03 · 2026 Fall",
+        statuses: [{ label: "진행 예정", tone: "purple" }],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "When, to Whom, and How LLM Participates?",
         body: "두 학습자의 영어 협력 대화에 LLM이 참여할 때, 언제 말할지 · 누구에게 말할지 · 어떤 대화 행위를 할지에 대한 교육적 판단 기준을 세웁니다. 실제 초등 EFL 교실에서 학생-학생-AI 대화를 수집해 데이터셋과 벤치마크를 구축합니다.",
-        tags: ["In Progress", "Dataset & Benchmark"],
         details: [
           { label: "RQ1", body: "EFL 환경에서 어린 학습자 간 협력적 언어 학습을 촉진하기 위한 LLM의 대화 행위 스키마는 어떻게 정의될 수 있는가?" },
           { label: "RQ2", body: "LLM 평가자는 이 스키마에 따라 LLM 대화 행위의 적절성을 얼마나 교사와 유사하게 평가하는가?" },
@@ -104,7 +124,7 @@ const content = {
       },
     ],
     teamHeading: "Team",
-    teamBody: "SLA 그룹은 과업과 상호작용 역할을 이론에 근거해 설계하고, NLP 그룹은 이를 실시간 음성 시스템으로 구현합니다.",
+    teamBody: "TBLT-Agent 팀은 언어 학습 이론, 교실 실천, AI 시스템 개발을 연결합니다.",
     publicationsHeading: "Publications",
   },
   en: {
@@ -112,23 +132,24 @@ const content = {
     description: "TBLT-Agent is a real-time voice AI task interlocutor for elementary EFL learners, built jointly by a second language acquisition (SLA) group and a natural language processing (NLP) group.",
     subtitle: "Voice AI Task Interlocutor",
     intro: [
-      "<strong>TBLT-Agent</strong> is a collaborative effort of <strong>second language acquisition (SLA)</strong> and <strong>natural language processing (NLP)</strong> researchers to build a real-time voice AI system. Grounded in task-based language teaching (TBLT) and computer-supported collaborative learning (CSCL), the AI carries out communicative tasks with elementary EFL learners in spoken English.",
-      "We design the AI not as a response tool but as a <strong>Task Interlocutor</strong>, and study in real classrooms how its interactional role shapes learners’ task performance and L2 learning.",
+      "<strong>TBLT-Agent</strong> is a collaboration between second language acquisition (SLA) and natural language processing (NLP) researchers to build a real-time voice AI system.",
+      "Grounded in <strong>task-based language teaching (TBLT)</strong> and <strong>computer-supported collaborative learning (CSCL)</strong>, the system has the AI agent join elementary EFL learners’ spoken tasks.",
+      "We study in real classrooms how the agent's participation shapes their L2 learning.",
     ],
     tryIt: "Try the System",
     systemHeading: "System",
-    systemBody: "Starting from one-on-one learner–AI conversation, TBLT-Agent is expanding into three-party dialogue in which the AI supports collaboration between two learners.",
+    systemBody: "TBLT-Agent connects browser-based English learning activities to Python voice agents through <a href=\"https://livekit.com/\" target=\"_blank\" rel=\"noopener noreferrer\">LiveKit</a>. A <a href=\"https://nextjs.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Next.js</a> application provides student task interfaces and teacher controls, while <a href=\"https://supabase.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Supabase</a> stores configuration and session data. Three systems share this platform but differ in how they process speech and control the conversation.",
     systems: [
       {
         term: "System 01 · Realtime",
         tags: ["In Classroom"],
         visual: ["H", "↔", "AI"],
         title: "Realtime Task Interlocutor",
-        body: "An AI character carries out a spoken English task with one learner in real time. Its interactional role is set to either dominant or collaborative.",
+        body: "An AI character works with one learner to complete a spoken English task, either leading the interaction or sharing control as a collaborative partner.",
         details: [
-          { label: "Participants", body: "1 learner · 1 AI" },
-          { label: "Voice", body: "Real-time conversation on the OpenAI Realtime model" },
-          { label: "AI role", body: "Dominant · Collaborative — after Storch’s pair dynamics model" },
+          { label: "Interaction", body: "1 learner ↔ 1 AI" },
+          { label: "Speech Processing", body: "Speech-to-speech interaction using OpenAI Realtime." },
+          { label: "Dialogue Control", body: "The Realtime model generates conversational responses from a prompt configuration combining character instructions, an active task card, interaction style, and corrective-feedback condition. Dominant and collaborative styles guide how the AI participates; explicit correction is configured independently." },
         ],
       },
       {
@@ -136,23 +157,23 @@ const content = {
         tags: ["In Development"],
         visual: ["H", "H", "+", "AI"],
         title: "Multiparty Tutor",
-        body: "Two learners develop one task together over three steps. The AI waits while they talk; once both finish a step, it speaks as an English tutor, noting what they did well together and then coaching each learner on one learning point.",
+        body: "Two learners complete structured speaking activities together. The AI manages the activity sequence and provides individual language feedback at submission points.",
         details: [
-          { label: "Participants", body: "2 learners · 1 AI" },
-          { label: "Voice", body: "Per-learner speech recognition → LLM → speech synthesis pipeline" },
-          { label: "Design", body: "A state machine controls steps and practice turns; the LLM generates grounded feedback (review · encourage · repair · examples). Up to two practice tries per learner" },
+          { label: "Interaction", body: "2 learners in peer dialogue · 1 AI tutor" },
+          { label: "Speech Processing", body: "Per-learner speech recognition → activity or practice submission → LLM-based feedback → speech synthesis" },
+          { label: "Dialogue Control", body: "A server-side state machine manages activities, submissions, and practice turns. The LLM evaluates each learner’s submitted speech and proposes feedback and a next action. The server validates these proposals against the current learner, activity, and practice limits before progressing. Correction practice targets actual errors within specified language features." },
         ],
       },
       {
         term: "System 03 · Pipeline",
-        tags: ["Planned"],
+        tags: ["Research Prototype"],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "Multiparty Facilitator",
-        body: "The AI joins the peer conversation as a participant with its own name and voice — a more proficient English-speaking friend who supports the two learners’ collaboration. At each moment it decides when to speak, to whom, and with which dialogue act, and waits when the learners need the floor.",
+        body: "An AI partner supports a shared task by answering requests, asking learners to explain their ideas, and inviting them to respond to each other.",
         details: [
-          { label: "Participants", body: "2 learners · 1 AI" },
-          { label: "Design", body: "Utterance understanding (NLU) → dialogue state tracking (DST) → dialogue act selection (Policy) → response generation (NLG)" },
-          { label: "Research", body: "A dialogue act schema for the LLM, LLM evaluators validated against teacher annotations, and a benchmark of off-the-shelf LLMs’ intervention decisions" },
+          { label: "Interaction", body: "2 learners in peer dialogue · 1 AI facilitator" },
+          { label: "Speech Processing", body: "Per-learner speech recognition → LLM-based utterance understanding → dialogue state tracking → rule-based policy → LLM-based response generation → speech synthesis." },
+          { label: "Dialogue Control", body: "An event-driven state tracker maintains task and conversation state. At decision points such as turn completion or silence, a rule-based policy chooses whether to speak, which dialogue act to perform, and whom to address. The LLM expresses the selected action within permitted task information. Pending or ongoing responses are cancelled when learner speech or state changes invalidate the intervention." },
         ],
       },
     ],
@@ -176,22 +197,42 @@ const content = {
     studies: [
       {
         term: "Study 01 · 2026 Spring",
+        statuses: [{ label: "Done", tone: "green" }, { label: "Data analysis in progress", tone: "blue" }],
         visual: ["H", "↔", "AI"],
-        title: "AI Interactional Roles: Dominant vs Collaborative",
-        body: "Drawing on Storch’s pair dynamics model, we manipulate the AI’s role across two conditions and compare effects on elementary EFL learners’ task performance and L2 learning.",
-        tags: ["In Classroom", "AAAL 2027"],
+        title: "AI Interactional Roles and Corrective Feedback",
+        body: "Drawing on Storch’s pair dynamics model (2008), we compare four conditions combining AI interactional role (dominant or collaborative) with the presence or absence of oral corrective feedback to examine effects on elementary EFL learners’ task performance and L2 learning.",
         details: [
           { label: "RQ1", body: "How can generative AI support learners’ active task engagement during interactional tasks?" },
-          { label: "RQ2", body: "How do different AI interactional roles affect task performance and language development?" },
-          { label: "Measures", body: "Total turns, mean words per turn, topic initiations, accuracy of questions and suggestions (pre–post)" },
+          { label: "RQ2", body: "How do AI interactional roles and oral corrective feedback affect learners’ use of questions and suggestions during tasks and their subsequent learning outcomes?" },
+          { label: "Participants", body: "90 Korean elementary students" },
+          { label: "Conditions", body: "Dominant / collaborative AI × with / without oral corrective feedback — 4 groups" },
+          { label: "Procedure", body: "Over 3 weeks: Pretest → 3 interactive tasks → Posttest + exit survey" },
+          { label: "Measures", body: "Total turns, mean words per turn, topic initiations, use and accuracy of questions and suggestions during tasks, and pre–post changes in accuracy" },
         ],
       },
       {
         term: "Study 02 · 2026 Fall",
+        visualConditions: [
+          { label: "Class 1 · Learner–learner", tokens: ["H", "H"] },
+          { label: "Classes 2–3 · AI task participant", tokens: ["H", "↔", "AI"] },
+          { label: "Class 4 · AI tutor", tokens: ["H", "H", "+", "AI"] },
+        ],
+        statuses: [{ label: "In Progress", tone: "blue" }],
+        visual: ["H", "H", "+", "AI"],
+        title: "AI Tutoring and Task Participation in Pair Work",
+        body: "We compare learner–learner pair work, learner–AI pair work, and pair work supported by an AI tutor. When AI serves as a task participant (learner–AI pair work), we also compare explicit-feedback and no-feedback conditions.",
+        details: [
+          { label: "Participants", body: "90 Korean elementary students · 4 classes" },
+          { label: "Conditions", body: "Class 1 · Learner–learner pair work: Two students interact to complete the tasks\n\nClasses 2–3 · Learner–AI pair work: AI acts as the task participant (Learner B), with explicit-feedback and no-feedback conditions\n\nClass 4 · Learner–learner + AI tutor: AI provides feedback and tutoring, giving feedback first when errors occur in target features. Learners initiate questions" },
+          { label: "Procedure", body: "Over 2 weeks: Pretest → 3 interactive tasks → Posttest + exit survey" },
+        ],
+      },
+      {
+        term: "Study 03 · 2026 Fall",
+        statuses: [{ label: "Planned", tone: "purple" }],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "When, to Whom, and How LLM Participates?",
         body: "We establish pedagogical criteria for when an LLM should speak, to whom, and with which dialogue act as it joins two learners’ collaborative English dialogue. Collecting learner–learner–AI conversations in real elementary EFL classrooms, we build a dataset and benchmark.",
-        tags: ["In Progress", "Dataset & Benchmark"],
         details: [
           { label: "RQ1", body: "How can a dialogue act schema be defined for an LLM that facilitates collaborative language learning among young EFL learners?" },
           { label: "RQ2", body: "How closely do LLM evaluators match teachers when judging the appropriateness of LLM dialogue acts under this schema?" },
@@ -201,7 +242,7 @@ const content = {
       },
     ],
     teamHeading: "Team",
-    teamBody: "The SLA group grounds tasks and interactional roles in theory; the NLP group turns them into a real-time voice system.",
+    teamBody: "The TBLT-Agent team connects language learning theory, classroom practice, and AI system development.",
     publicationsHeading: "Publications",
   },
 } as const;
@@ -215,7 +256,7 @@ const institutions = [
   { name: "KAIST", file: "kaist.png", height: 32, emblem: false },
   { name: "Cheongju National University of Education", file: "cnue.svg", height: 48, emblem: true },
 ];
-const tagTone: Record<string, string> = { "In Classroom": "green", "In Development": "blue", Planned: "purple", "AAAL 2027": "red", "In Progress": "blue", "Dataset & Benchmark": "purple" };
+const tagTone: Record<string, string> = { "In Classroom": "green", "In Development": "blue", "Research Prototype": "purple" };
 ---
 
 <BaseLayout locale={locale} title={copy.title} description={copy.description}>
@@ -242,7 +283,7 @@ const tagTone: Record<string, string> = { "In Classroom": "green", "In Developme
       <div class="rp-container">
         <header class="rp-section__header">
           <h2 id="system-heading">{copy.systemHeading}</h2>
-          <p>{copy.systemBody}</p>
+          <p set:html={copy.systemBody} />
         </header>
         <ol class="rp-systems">
           {copy.systems.map((system) => (
@@ -305,13 +346,25 @@ const tagTone: Record<string, string> = { "In Classroom": "green", "In Developme
         </div>
         {copy.studies.map((study, index) => (
           <article class="rp-card rp-study" role="tabpanel" id={`study-panel-${index}`} aria-labelledby={`study-tab-${index}`} hidden={index !== latestStudy}>
-            <div class="rp-study__visual" aria-hidden="true">
-              {study.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
-            </div>
+            {"visualConditions" in study ? (
+              <ul class="rp-study__conditions">
+                {study.visualConditions.map((condition) => (
+                  <li>
+                    <div class="rp-study__visual" role="img" aria-label={condition.label}>
+                      {condition.tokens.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div class="rp-study__visual" aria-hidden="true">
+                {study.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+              </div>
+            )}
             <p class="rp-study__term">{study.term}</p>
             <h3>{study.title}</h3>
             <p>{study.body}</p>
-            <ul class="rp-tags">{study.tags.map((tag) => <li data-tone={tagTone[tag]}>{tag}</li>)}</ul>
+            <ul class="rp-tags">{study.statuses.map((status) => <li data-tone={status.tone}>{status.label}</li>)}</ul>
             <dl class="rp-study__details">
               {study.details.map((detail) => <div><dt>{detail.label}</dt><dd>{detail.body}</dd></div>)}
             </dl>
