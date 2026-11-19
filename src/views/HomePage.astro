@@ -31,7 +31,7 @@ const content = {
         details: [
           { label: "참여자", body: "학습자 1명 · AI 1명" },
           { label: "음성 처리", body: "OpenAI Realtime 모델 기반 실시간 대화" },
-          { label: "AI 역할", body: "주도형(Dominant) · 협력형(Collaborative) — Storch의 pair dynamics model" },
+          { label: "AI 역할", body: "주도형(Dominant) · 협력형(Collaborative) — Storch의 pair dynamics model (2008)" },
         ],
       },
       {
@@ -79,22 +79,42 @@ const content = {
     studies: [
       {
         term: "Study 01 · 2026 Spring",
+        statuses: [{ label: "완료", tone: "green" }, { label: "데이터 분석 중", tone: "blue" }],
         visual: ["H", "↔", "AI"],
-        title: "AI 상호작용 역할: 주도형 vs 협력형",
-        body: "Storch의 pair dynamics model을 바탕으로 AI의 역할을 두 조건으로 조작하고, 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 비교합니다.",
-        tags: ["In Classroom", "AAAL 2027"],
+        title: "AI 상호작용 역할과 교정 피드백",
+        body: "Storch의 pair dynamics model (2008)에 따른 AI의 상호작용 역할(주도형 · 협력형)과 구두 교정 피드백(Corrective Feedback) 제공 여부를 조합한 네 조건에서, 초등 EFL 학습자의 과업 수행과 L2 학습에 미치는 영향을 비교합니다.",
         details: [
           { label: "RQ1", body: "생성형 AI는 상호작용 과업에서 학습자의 적극적인 과업 수행을 어떻게 지원할 수 있는가?" },
-          { label: "RQ2", body: "서로 다른 AI 상호작용 역할은 과업 수행과 언어 발달에 어떤 영향을 미치는가?" },
-          { label: "측정", body: "발화 순서 수, 발화당 평균 단어 수, 주제 개시 빈도, 질문하기 · 제안 화행 정확도(사전-사후)" },
+          { label: "RQ2", body: "AI 상호작용 역할과 구두 교정 피드백은 과업 중 질문하기 · 제안 화행 사용과 이후 학습 성과에 어떤 영향을 미치는가?" },
+          { label: "참여자", body: "한국 초등학생 90명" },
+          { label: "실험 조건", body: "주도형 / 협력형 AI × 구두 교정 피드백 제공 / 미제공 — 총 4개 조건" },
+          { label: "진행 절차", body: "3주간 진행: 사전검사 → 상호작용 과업 3회 → 사후검사 + 종료 설문" },
+          { label: "측정", body: "발화 순서 수, 발화당 평균 단어 수, 주제 개시 빈도, 과업 중 질문하기 · 제안 화행 사용 및 정확도, 사전-사후 정확도 변화" },
         ],
       },
       {
         term: "Study 02 · 2026 Fall",
+        visualConditions: [
+          { label: "1반 · 학습자–학습자", tokens: ["H", "↔", "H"] },
+          { label: "2–3반 · AI 과업 참여자", tokens: ["H", "↔", "AI"] },
+          { label: "4반 · AI 튜터", tokens: ["H", "↔", "H", "+", "AI"] },
+        ],
+        statuses: [{ label: "진행 중", tone: "blue" }],
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "짝 활동에서의 AI 튜터링과 과업 참여",
+        body: "2026년 10–11월, L9 과업을 통해 학습자끼리의 짝 활동, AI가 짝 역할을 맡는 과업, AI 튜터가 지원하는 짝 활동을 비교합니다. AI 과업 참여 조건에서는 명시적 피드백 제공 여부도 비교합니다.",
+        details: [
+          { label: "참여자", body: "한국 초등학생 90명 · 4개 반" },
+          { label: "실험 조건", body: "1반 · 학습자–학습자 짝 활동: 두 학생이 서로 대화하며 과업 수행\n\n2–3반 · 학습자–AI 짝 활동: AI가 과업 참여자(Learner B) 역할. 명시적 피드백 제공 / 미제공 조건 비교\n\n4반 · 학습자–학습자 + AI 튜터: 목표 언어 형식의 오류에 먼저 피드백과 튜터링 제공. 질문은 학습자가 먼저 시작" },
+          { label: "진행 절차", body: "2주간 진행: 사전검사 → 상호작용 과업 3회 → 사후검사 + 종료 설문" },
+        ],
+      },
+      {
+        term: "Study 03 · 2026 Fall",
+        statuses: [{ label: "진행 예정", tone: "purple" }],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "When, to Whom, and How LLM Participates?",
         body: "두 학습자의 영어 협력 대화에 LLM이 참여할 때, 언제 말할지 · 누구에게 말할지 · 어떤 대화 행위를 할지에 대한 교육적 판단 기준을 세웁니다. 실제 초등 EFL 교실에서 학생-학생-AI 대화를 수집해 데이터셋과 벤치마크를 구축합니다.",
-        tags: ["In Progress", "Dataset & Benchmark"],
         details: [
           { label: "RQ1", body: "EFL 환경에서 어린 학습자 간 협력적 언어 학습을 촉진하기 위한 LLM의 대화 행위 스키마는 어떻게 정의될 수 있는가?" },
           { label: "RQ2", body: "LLM 평가자는 이 스키마에 따라 LLM 대화 행위의 적절성을 얼마나 교사와 유사하게 평가하는가?" },
@@ -128,7 +148,7 @@ const content = {
         details: [
           { label: "Participants", body: "1 learner · 1 AI" },
           { label: "Voice", body: "Real-time conversation on the OpenAI Realtime model" },
-          { label: "AI role", body: "Dominant · Collaborative — after Storch’s pair dynamics model" },
+          { label: "AI role", body: "Dominant · Collaborative — after Storch’s pair dynamics model (2008)" },
         ],
       },
       {
@@ -176,22 +196,42 @@ const content = {
     studies: [
       {
         term: "Study 01 · 2026 Spring",
+        statuses: [{ label: "Done", tone: "green" }, { label: "Data analysis in progress", tone: "blue" }],
         visual: ["H", "↔", "AI"],
-        title: "AI Interactional Roles: Dominant vs Collaborative",
-        body: "Drawing on Storch’s pair dynamics model, we manipulate the AI’s role across two conditions and compare effects on elementary EFL learners’ task performance and L2 learning.",
-        tags: ["In Classroom", "AAAL 2027"],
+        title: "AI Interactional Roles and Corrective Feedback",
+        body: "Drawing on Storch’s pair dynamics model (2008), we compare four conditions combining AI interactional role (dominant or collaborative) with the presence or absence of oral corrective feedback to examine effects on elementary EFL learners’ task performance and L2 learning.",
         details: [
           { label: "RQ1", body: "How can generative AI support learners’ active task engagement during interactional tasks?" },
-          { label: "RQ2", body: "How do different AI interactional roles affect task performance and language development?" },
-          { label: "Measures", body: "Total turns, mean words per turn, topic initiations, accuracy of questions and suggestions (pre–post)" },
+          { label: "RQ2", body: "How do AI interactional roles and oral corrective feedback affect learners’ use of questions and suggestions during tasks and their subsequent learning outcomes?" },
+          { label: "Participants", body: "90 Korean elementary students" },
+          { label: "Conditions", body: "Dominant / collaborative AI × with / without oral corrective feedback — 4 groups" },
+          { label: "Procedure", body: "Over 3 weeks: Pretest → 3 interactive tasks → Posttest + exit survey" },
+          { label: "Measures", body: "Total turns, mean words per turn, topic initiations, use and accuracy of questions and suggestions during tasks, and pre–post changes in accuracy" },
         ],
       },
       {
         term: "Study 02 · 2026 Fall",
+        visualConditions: [
+          { label: "Class 1 · Learner–learner", tokens: ["H", "↔", "H"] },
+          { label: "Classes 2–3 · AI task participant", tokens: ["H", "↔", "AI"] },
+          { label: "Class 4 · AI tutor", tokens: ["H", "↔", "H", "+", "AI"] },
+        ],
+        statuses: [{ label: "In Progress", tone: "blue" }],
+        visual: ["H", "↔", "H", "+", "AI"],
+        title: "AI Tutoring and Task Participation in Pair Work",
+        body: "We compare learner–learner pair work, learner–AI pair work, and pair work supported by an AI tutor. When AI serves as a task participant (learner–AI pair work), we also compare explicit-feedback and no-feedback conditions.",
+        details: [
+          { label: "Participants", body: "90 Korean elementary students · 4 classes" },
+          { label: "Conditions", body: "Class 1 · Learner–learner pair work: Two students interact to complete the tasks\n\nClasses 2–3 · Learner–AI pair work: AI acts as the task participant (Learner B), with explicit-feedback and no-feedback conditions\n\nClass 4 · Learner–learner + AI tutor: AI provides feedback and tutoring, giving feedback first when errors occur in target features. Learners initiate questions" },
+          { label: "Procedure", body: "Over 2 weeks: Pretest → 3 interactive tasks → Posttest + exit survey" },
+        ],
+      },
+      {
+        term: "Study 03 · 2026 Fall",
+        statuses: [{ label: "Planned", tone: "purple" }],
         visual: ["H", "↔", "H", "+", "AI"],
         title: "When, to Whom, and How LLM Participates?",
         body: "We establish pedagogical criteria for when an LLM should speak, to whom, and with which dialogue act as it joins two learners’ collaborative English dialogue. Collecting learner–learner–AI conversations in real elementary EFL classrooms, we build a dataset and benchmark.",
-        tags: ["In Progress", "Dataset & Benchmark"],
         details: [
           { label: "RQ1", body: "How can a dialogue act schema be defined for an LLM that facilitates collaborative language learning among young EFL learners?" },
           { label: "RQ2", body: "How closely do LLM evaluators match teachers when judging the appropriateness of LLM dialogue acts under this schema?" },
@@ -214,7 +254,7 @@ const institutions = [
   { name: "KAIST", file: "kaist.png", height: 32, emblem: false },
   { name: "Cheongju National University of Education", file: "cnue.svg", height: 48, emblem: true },
 ];
-const tagTone: Record<string, string> = { "In Classroom": "green", "In Development": "blue", Planned: "purple", "AAAL 2027": "red", "In Progress": "blue", "Dataset & Benchmark": "purple" };
+const tagTone: Record<string, string> = { "In Classroom": "green", "In Development": "blue", Planned: "purple" };
 ---
 
 <BaseLayout locale={locale} title={copy.title} description={copy.description}>
@@ -304,13 +344,25 @@ const tagTone: Record<string, string> = { "In Classroom": "green", "In Developme
         </div>
         {copy.studies.map((study, index) => (
           <article class="rp-card rp-study" role="tabpanel" id={`study-panel-${index}`} aria-labelledby={`study-tab-${index}`} hidden={index !== latestStudy}>
-            <div class="rp-study__visual" aria-hidden="true">
-              {study.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
-            </div>
+            {"visualConditions" in study ? (
+              <ul class="rp-study__conditions">
+                {study.visualConditions.map((condition) => (
+                  <li>
+                    <div class="rp-study__visual" role="img" aria-label={condition.label}>
+                      {condition.tokens.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div class="rp-study__visual" aria-hidden="true">
+                {study.visual.map((token) => token === "AI" ? <i class="ai">AI</i> : token === "H" ? <i>H</i> : <b>{token}</b>)}
+              </div>
+            )}
             <p class="rp-study__term">{study.term}</p>
             <h3>{study.title}</h3>
             <p>{study.body}</p>
-            <ul class="rp-tags">{study.tags.map((tag) => <li data-tone={tagTone[tag]}>{tag}</li>)}</ul>
+            <ul class="rp-tags">{study.statuses.map((status) => <li data-tone={status.tone}>{status.label}</li>)}</ul>
             <dl class="rp-study__details">
               {study.details.map((detail) => <div><dt>{detail.label}</dt><dd>{detail.body}</dd></div>)}
             </dl>
