@@ -258,7 +258,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-
 .rp-card > p { margin: 0 0 8px; color: var(--rp-muted); font-size: 16px; }
 .rp-systems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: stretch; margin: 0; padding: 0; list-style: none; }
 .rp-system { position: relative; justify-content: flex-start; padding: 28px 24px; }
-.rp-system + .rp-system::before { position: absolute; top: 56px; left: -24px; content: "→"; color: var(--rp-faint); transform: translateY(-50%); }
 .rp-system .rp-system__term { margin: 0 0 4px; color: var(--rp-faint); font-size: 12px; font-weight: 600; }
 .rp-system h3 { margin-bottom: 8px; font-size: 22px; }
 .rp-system .rp-tags { margin-bottom: 16px; }
@@ -333,7 +332,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-
 @media (max-width: 1024px) {
   .rp-steps { grid-template-columns: 1fr; max-width: 640px; }
   .rp-systems { grid-template-columns: 1fr; max-width: 640px; margin-inline: auto; gap: 40px; }
-  .rp-system + .rp-system::before { top: -28px; left: 50%; transform: translateX(-50%) rotate(90deg); }
 }
 
 @media (max-width: 720px) {
