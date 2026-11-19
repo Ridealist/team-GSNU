@@ -304,11 +304,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-
 .rp-study__details dt { font-weight: 700; }
 .rp-study__details dd { margin: 0; color: var(--rp-muted); }
 
-.rp-team__section + .rp-team__section { margin-top: 56px; }
+.rp-team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 0; max-width: 880px; margin-inline: auto; }
+.rp-team__section--wide { grid-column: 1 / -1; }
 .rp-team h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; line-height: 1.375; text-align: center; }
 .rp-team__people { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 24px; margin: 32px 0 0; padding: 0; list-style: none; }
 .rp-team__people li { display: flex; width: 200px; flex-direction: column; align-items: center; text-align: center; }
-.rp-team__people--faculty { gap: 32px 160px; }
+.rp-team__people--faculty { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: 32px 0; }
 .rp-team__people--faculty li { width: 280px; }
 .rp-team__people img, .rp-avatar { width: 136px; height: 136px; border-radius: 50%; object-fit: cover; box-shadow: 0 10px 15px -3px rgba(0,0,0,.04), 0 4px 6px -2px rgba(0,0,0,.02); }
 .rp-avatar { display: grid; place-items: center; color: #338cf5; background: #e8eef9; font-size: 40px; font-weight: 700; letter-spacing: 0; }
@@ -341,6 +342,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-
   .rp-section { padding-block: 48px; }
   .rp-section + .rp-section::before { height: 56px; }
   .rp-study { padding: 24px 20px; }
+  .rp-team { grid-template-columns: 1fr; }
+  .rp-team__people--faculty { display: flex; }
   .rp-team__people, .rp-team__people--faculty { gap: 28px 12px; }
   .rp-team__people li, .rp-team__people--faculty li { width: 160px; }
   .rp-team__people img, .rp-avatar { width: 112px; height: 112px; }
